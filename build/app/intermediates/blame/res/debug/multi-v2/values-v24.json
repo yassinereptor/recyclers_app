@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/yassinereptor/Desktop/recyclers_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
+            "outputFile": "/home/yassinereptor/Desktop/recycler_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-v24/values-v24.xml",
             "map": [
                 {
                     "source": "/home/yassinereptor/.gradle/caches/transforms-1/files-1.1/media-1.0.0.aar/b86caab85bf0fc560773d2576a36ff92/res/values-v24/values-v24.xml",

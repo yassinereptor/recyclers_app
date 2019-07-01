@@ -1,8 +1,27 @@
 {
     "logs": [
         {
-            "outputFile": "/home/yassinereptor/Desktop/recyclers_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
+            "outputFile": "/home/yassinereptor/Desktop/recycler_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values/values.xml",
             "map": [
+                {
+                    "source": "/home/yassinereptor/Desktop/recycler_app/android/app/src/main/res/values/styles.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "347"
+                    },
+                    "to": {
+                        "startLines": "392",
+                        "startColumns": "4",
+                        "startOffsets": "21483",
+                        "endLines": "396",
+                        "endColumns": "12",
+                        "endOffsets": "21775"
+                    }
+                },
                 {
                     "source": "/home/yassinereptor/.gradle/caches/transforms-1/files-1.1/media-1.0.0.aar/b86caab85bf0fc560773d2576a36ff92/res/values/values.xml",
                     "from": {
@@ -73,25 +92,6 @@
                         "endLines": "3,4,5,6,7,8,9,10,255,333,373,374,375,376,377,378,379,380,382,383,384,385,386,387,388,389,390",
                         "endColumns": "89,79,89,89,79,80,79,79,20,20,104,180,124,106,179,122,115,102,187,104,180,124,174,147,62,61,78",
                         "endOffsets": "251,331,421,511,591,672,752,832,14869,16708,19179,19360,19485,19592,19772,19895,20011,20114,20469,20574,20755,20880,21055,21203,21266,21328,21407"
-                    }
-                },
-                {
-                    "source": "/home/yassinereptor/Desktop/recyclers_app/android/app/src/main/res/values/styles.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endLines": "6",
-                        "endColumns": "12",
-                        "endOffsets": "347"
-                    },
-                    "to": {
-                        "startLines": "392",
-                        "startColumns": "4",
-                        "startOffsets": "21483",
-                        "endLines": "396",
-                        "endColumns": "12",
-                        "endOffsets": "21775"
                     }
                 },
                 {

@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/yassinereptor/Desktop/recyclers_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-ms/values-ms.xml",
+            "outputFile": "/home/yassinereptor/Desktop/recycler_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-ms/values-ms.xml",
             "map": [
                 {
                     "source": "/home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/97b2b68da4b27061d1c2ab4b56c71713/res/values-ms/values.xml",

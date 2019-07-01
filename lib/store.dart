@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:recyclers/config/config.dart';
 import 'package:recyclers/models/product.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 
 class StoreScreen extends StatefulWidget {
   StoreScreen({Key key}) : super(key: key);
@@ -146,7 +147,37 @@ buildCat(IconData icon)
           Row(
             crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(
+         GestureDetector(
+          onTap: (){
+            Navigator.of(context).push(MaterialPageRoute<void>(
+              builder: (BuildContext context) {
+                print("=------------${entry.id}-------------=");
+                return Scaffold(
+                  appBar: AppBar(
+                    title: const Text('Flippers Page'),
+                  ),
+                  body: Container(
+                    // The blue background emphasizes that it's a new route.
+                    color: Colors.lightBlueAccent,
+                    padding: const EdgeInsets.all(16.0),
+                    alignment: Alignment.topLeft,
+                    child: Hero(
+                      tag: entry.id,
+                      child: CachedNetworkImage(
+                      imageUrl: "http://${AppConfig.ip}/products/${entry.user_id}/${entry.image}",
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => new CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => new Icon(Icons.error),
+                  ),
+                    )
+                  ),
+                );
+              }
+            ));
+          },
+           child:  Hero(
+             tag: entry.id,
+             child: Container(
           margin: EdgeInsets.only(right: 10),
           alignment: Alignment.center,
           child: SizedBox(
@@ -159,14 +190,22 @@ buildCat(IconData icon)
                     ],
                     color: Colors.black,
                     borderRadius: BorderRadius.all(Radius.circular(3)),
-                    image: DecorationImage(
-                      image:  AssetImage("assets/images/profile.png"),
-                      fit: BoxFit.fill
-                    )
+                    // image: DecorationImage(
+                    //   image:  AssetImage("assets/images/profile.png"),
+                    //   fit: BoxFit.fill
+                    // )
+                  ),
+                  child: CachedNetworkImage(
+                      imageUrl: "http://${AppConfig.ip}/products/${entry.user_id}/${entry.image}",
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => new CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => new Icon(Icons.error),
                   ),
                 ),
             ),
           ),
+           )
+         ),
           Expanded(
             child: ConstrainedBox(
               constraints: BoxConstraints(
@@ -297,7 +336,9 @@ class BackendService {
 }
 
 class ProductModel {
+  String id;
   String title;
+  String user_id;
   String desc;
   String price;
   String quality;
@@ -313,8 +354,10 @@ class ProductModel {
       print("-------------------------------------------");
       print(obj);
       print("-------------------------------------------");
+    this.id = obj["id"];
     this.title = obj["title"];
-    this.desc = obj["desc"];         
+    this.desc = obj["desc"];    
+    this.user_id = obj["user_id"];
     this.price = obj["price"].toString();
     this.quality = obj["quality"].toString();
     this.quantity = obj["quantity"];

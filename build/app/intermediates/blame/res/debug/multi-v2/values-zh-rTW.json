@@ -1,7 +1,7 @@
 {
     "logs": [
         {
-            "outputFile": "/home/yassinereptor/Desktop/recyclers_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-zh-rTW/values-zh-rTW.xml",
+            "outputFile": "/home/yassinereptor/Desktop/recycler_app/build/app/intermediates/incremental/mergeDebugResources/merged.dir/values-zh-rTW/values-zh-rTW.xml",
             "map": [
                 {
                     "source": "/home/yassinereptor/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/75de3642daa6865ce4bebd6de8c166e4/res/values-zh-rTW/values-zh-rTW.xml",

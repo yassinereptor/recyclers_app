@@ -38,6 +38,7 @@ dependencies:
   flutter_rating_bar: ^1.2.0
   hidden_drawer_menu: ^1.1.1
   extended_image: ^0.5.1
+  cached_network_image: ^1.0.0
   
 dev_dependencies:
   flutter_test:

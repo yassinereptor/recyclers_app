@@ -33,7 +33,7 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="w2r" >
+        android:label="Recyclers" >
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyDyBKrBjdiiTeOQAjd5lTeywAtLpgDlHBU" />
