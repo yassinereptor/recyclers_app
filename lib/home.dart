@@ -386,7 +386,7 @@ class _HomeInsiderScreenState extends State<HomeInsiderScreen> {
     {
       Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddSellerScreen()),
+            MaterialPageRoute(builder: (context) => AddSellerScreen(data: this.user,)),
           );
     }
     else

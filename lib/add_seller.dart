@@ -12,7 +12,8 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 
 class AddSellerScreen extends StatefulWidget {
-  AddSellerScreen({Key key}) : super(key: key);
+  var data;
+  AddSellerScreen({Key key, this.data}) : super(key: key);
 
   @override
   _AddSellerScreenState createState() => _AddSellerScreenState();
@@ -27,8 +28,9 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
     _dropDownMenuItems = getDropDownMenuItems();
     _currentUnit = _dropDownMenuItems[0].value;
 
-      userOption = 1;
+      userOption = 0;
       productData = new ProductData();
+      productData.unit = 1;
     super.initState();
 
   }
@@ -163,9 +165,11 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
       var obj = prefs.getString("user_data");
       if(obj != null)
       {
+          
         Map<String, dynamic> tmp = jsonDecode(obj);
         response = await dio.post("http://${AppConfig.ip}/api/product/add", data: {
             "user_id": tmp['user']['_id'],
+            "user_name": widget.data.name,
             "title": productData.title,
             "desc": productData.description,
             "price": productData.price,
@@ -174,11 +178,13 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
             "fix": productData.fix,
             "bid": productData.bid,
             "images": productData.images,
+            "unit": productData.unit,
+            "time": new DateTime.now().toString(),
           },
           options: Options(headers: {
             "authorization": "Token ${tmp['user']['token']}",
           }));
-          print(response);
+ 
           if(response.statusCode == 200)
           {
             Navigator.pop(context);

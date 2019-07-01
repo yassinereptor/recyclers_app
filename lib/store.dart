@@ -141,8 +141,8 @@ buildCat(IconData icon)
       print("${entry.id}");
       print("++++++++++++++++++++++++++++++++++++++++++++++++++");
     return Container(
-      padding: EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 5),
-      margin: EdgeInsets.only(left: 5, right: 5, top: 3, bottom: 3),
+      padding: EdgeInsets.only(left: 0, right: 5, top: 0, bottom: 0),
+      margin: EdgeInsets.only(left: 5, right: 5, top: 6, bottom: 6),
       decoration: BoxDecoration(
         borderRadius: BorderRadius.all(Radius.circular(3)),
         color: Colors.white,
@@ -163,28 +163,36 @@ buildCat(IconData icon)
            child:  Hero(
              tag: entry.id,
              child: Container(
+               decoration: BoxDecoration(
+                    borderRadius: BorderRadius.all(Radius.circular(3)),
+
+               ),
           margin: EdgeInsets.only(right: 10),
           alignment: Alignment.center,
           child: SizedBox(
-            width: 120,
-            height: 120,
+            width: 130,
+            height: 110,
             child: Container(
                   decoration: BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(color: Colors.black26, offset: Offset.zero, blurRadius: 2, spreadRadius: 0),
-                    ],
+                    borderRadius: BorderRadius.only(bottomLeft: Radius.circular(3), topLeft: Radius.circular(3)),
+                    // boxShadow: [
+                    //   BoxShadow(color: Colors.black26, offset: Offset.zero, blurRadius: 2, spreadRadius: 0),
+                    // ],
                     color: Colors.black,
-                    borderRadius: BorderRadius.all(Radius.circular(3)),
+                    image: DecorationImage(
+                        fit: BoxFit.cover,
+                      image: CachedNetworkImageProvider(
+                        "http://${AppConfig.ip}/products/${entry.user_id}/${entry.image}",
+                        errorListener: (){
+                          
+                        }
+                    )
+                    )
+
                     // image: DecorationImage(
                     //   image:  AssetImage("assets/images/profile.png"),
                     //   fit: BoxFit.fill
                     // )
-                  ),
-                  child: CachedNetworkImage(
-                      imageUrl: "http://${AppConfig.ip}/products/${entry.user_id}/${entry.image}",
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => new CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => new Icon(Icons.error),
                   ),
                 ),
             ),
@@ -194,11 +202,11 @@ buildCat(IconData icon)
           Expanded(
             child: ConstrainedBox(
               constraints: BoxConstraints(
-                maxHeight: 120,
+                maxHeight: 110,
                 maxWidth: 200
               ),
               child: Container(
-              padding: EdgeInsets.only(top: 5),
+              padding: EdgeInsets.only(top: 10, bottom: 5),
             child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
@@ -211,9 +219,9 @@ buildCat(IconData icon)
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(entry.title, style: TextStyle(
-                          fontSize: 18
+                          fontSize: 20
                         ),),
-                        Text("by Username", style: TextStyle(
+                        Text("by ${entry.user_name}", style: TextStyle(
                           fontSize: 12,
                           color: Colors.grey
                         ),),
@@ -309,12 +317,13 @@ class BackendService {
   static Future<List<ProductModel>> getProduct(offset, limit) async {
     Dio dio = new Dio();
     final responseBody = (await dio.post("http://${AppConfig.ip}/api/product/load", data: {
-            "filter": "",
+            "filter": "time",
             "skip": offset,
             "limit": limit
           }
     )).data;
    
+    print(responseBody);
     return ProductModel.fromJsonList(responseBody);
   }
 }
@@ -323,6 +332,7 @@ class ProductModel {
   String id;
   String title;
   String user_id;
+  String user_name;
   String desc;
   String price;
   String quality;
@@ -342,6 +352,7 @@ class ProductModel {
     this.title = obj["title"];
     this.desc = obj["desc"];    
     this.user_id = obj["user_id"];
+    this.user_name = obj["user_name"];
     this.price = obj["price"].toString();
     this.quality = obj["quality"].toString();
     this.quantity = obj["quantity"];
