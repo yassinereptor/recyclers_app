@@ -1,0 +1,441 @@
+import 'dart:convert';
+import 'dart:io';
+
+import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:recyclers/config/config.dart';
+import 'package:recyclers/home.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:recyclers/models/product.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+
+class AddSellerScreen extends StatefulWidget {
+  AddSellerScreen({Key key}) : super(key: key);
+
+  @override
+  _AddSellerScreenState createState() => _AddSellerScreenState();
+}
+
+class _AddSellerScreenState extends State<AddSellerScreen> {
+  int userOption;
+  ProductData productData;
+
+@override
+  void initState() {
+    _dropDownMenuItems = getDropDownMenuItems();
+    _currentUnit = _dropDownMenuItems[0].value;
+
+      userOption = 1;
+      productData = new ProductData();
+    super.initState();
+
+  }
+
+  final _formKey = GlobalKey<FormState>();
+
+  List<String> images =  new List();
+  List<Widget> widg =  new List();
+
+  List units =
+  ["Unit", "Gram", "Ounce", "Kg", "Ton", "Lb", "liter", "meter"];
+
+  List<DropdownMenuItem<String>> _dropDownMenuItems;
+  String _currentUnit;
+
+  TextEditingController title_controller = new TextEditingController();
+  TextEditingController desc_controller = new TextEditingController();
+  TextEditingController price_controller = new TextEditingController();
+  TextEditingController qua_controller = new TextEditingController();
+
+  List<DropdownMenuItem<String>> getDropDownMenuItems() {
+    List<DropdownMenuItem<String>> items = new List();
+    for (String item in units) {
+      items.add(new DropdownMenuItem(
+          value: item,
+          child: new Text(item)
+      ));
+    }
+    return items;
+  }
+
+  productsImage()
+  {
+    
+    setState(() {
+      widg.clear();
+      images.forEach((item){
+      widg.add(
+        Container(
+          margin: EdgeInsets.only(right: 10),
+          alignment: Alignment.center,
+          child: SizedBox(
+            width: 80,
+            height: 80,
+            child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(color: Colors.black26, offset: Offset.zero, blurRadius: 3, spreadRadius: 1),
+                    ],
+                    color: Colors.black,
+                    borderRadius: BorderRadius.all(Radius.circular(5)),
+                    image: DecorationImage(
+                      image:  MemoryImage(base64.decode(item)),
+                      fit: BoxFit.fill
+                    )
+                  ),
+                ),
+          ),
+        ),
+      );
+    });
+    });
+  }
+
+  void changedDropDownItem(String selectedCity) {
+    print("Selected city $units.indexOf(selectedCity), we are going to refresh the UI");
+    setState(() {
+      _currentUnit = selectedCity;
+      productData.unit = units.indexOf(selectedCity) + 1;
+    });
+  }
+
+  onBidSet(int val)
+  {
+    setState(() => userOption = val);
+  }
+
+  onFixSet(int val)
+  {
+    setState(() => userOption = val);
+  }
+
+  capPicPress() async
+  {
+    File image = await ImagePicker.pickImage(source: ImageSource.camera);
+    setState(() {
+      if(image != null)
+      {
+        images.add(base64Encode(image.readAsBytesSync()));
+       productsImage();
+      }
+    });
+  }
+
+  addPicPress() async
+  {
+    File image = await ImagePicker.pickImage(source: ImageSource.gallery);
+    setState(() {
+      if(image != null)
+      {
+        images.add(base64Encode(image.readAsBytesSync()));
+       productsImage();
+      }
+    });
+  }
+
+  onCancelImagePress()
+  {
+    setState(() {
+      images.clear();
+      widg.clear();
+    });
+  }
+
+  onSavePress() async
+  {
+    if(_formKey.currentState.validate())
+    {
+      productData.title = title_controller.text;
+      productData.description = desc_controller.text;
+      productData.price = double.parse(price_controller.text);
+      productData.quantity = int.parse(qua_controller.text);
+      productData.fix = userOption == 0? true : false;
+      productData.bid = userOption == 1? true : false;
+
+      productData.images = images;
+      
+      Response response;
+      Dio dio = new Dio();
+
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var obj = prefs.getString("user_data");
+      if(obj != null)
+      {
+        Map<String, dynamic> tmp = jsonDecode(obj);
+        response = await dio.post("http://${AppConfig.ip}/api/product/add", data: {
+            "user_id": tmp['user']['_id'],
+            "title": productData.title,
+            "desc": productData.description,
+            "price": productData.price,
+            "quantity": productData.quantity,
+            "quality": productData.quality,
+            "fix": productData.fix,
+            "bid": productData.bid,
+            "images": productData.images,
+          },
+          options: Options(headers: {
+            "authorization": "Token ${tmp['user']['token']}",
+          }));
+          print(response);
+          if(response.statusCode == 200)
+          {
+            Navigator.pop(context);
+          }
+      }
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        actions: <Widget>[
+          FlatButton(
+            textColor: Colors.white,
+            onPressed: onSavePress,
+            child: Text("Save", style: TextStyle(fontSize: 18),),
+            shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
+          ),
+        ],
+        leading: IconButton(icon: Icon(Icons.arrow_back, color: Colors.white,),
+        tooltip: "Cancel and Return to List",
+        onPressed: () {
+          Navigator.pop(context, true);
+        },
+        )
+      ),
+      backgroundColor: Colors.white,
+      body: Form(
+        key: _formKey,
+        child: Container(
+        padding: EdgeInsets.only(left: 20, right: 20, top: 30),
+       child: ScrollConfiguration(
+         behavior: ScrollBehaviorCos(),
+         child: ListView(
+         
+          children: <Widget>[
+            Container(
+              alignment: Alignment.centerLeft,
+              margin: EdgeInsets.only(bottom: 40),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+              Text("Add Product", style: TextStyle(
+                    fontFamily: "Oswald",
+                    fontSize: 25,
+                    color: Colors.black
+                  ),),
+            Row(
+              children: <Widget>[
+                Text("to continue ", style: TextStyle(
+              fontFamily: "Oswald",
+              fontSize: 15,
+              color: Color(0xff00b661)
+            ),),
+            Text("(* : mandatory)", style: TextStyle(
+              fontFamily: "Oswald",
+              fontSize: 15,
+              color: Colors.red
+            ),),
+              ],
+            )
+              ],
+            ),
+            ),
+             Container(
+               margin: EdgeInsets.only(bottom: 20),
+               child: Row(
+               mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Container(
+                    margin: EdgeInsets.only(right: 10),
+                  child: IconButton(icon: Icon(Icons.add_a_photo), iconSize: 30, color: Color(0xff00b661), onPressed: capPicPress, alignment: Alignment.center),
+                  ),
+                  Container(
+                    margin: EdgeInsets.only(right: 10),
+                    child: IconButton(icon: Icon(Icons.library_add), iconSize: 30, color: Color(0xff00b661), onPressed: addPicPress, alignment: Alignment.center),
+                  ),
+                  (images.isNotEmpty == true)? 
+                  Container(
+                    child: IconButton(icon: Icon(Icons.cancel), iconSize: 30, color: Colors.red, onPressed: onCancelImagePress, alignment: Alignment.center),
+                  ):
+                  Container(),
+                ],
+              ),
+             ),
+            (images.isNotEmpty == true)?
+            Container(
+              alignment: Alignment.center,
+              height: 100,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                shrinkWrap: true,
+                children: <Widget>[
+                  Row(
+                    children: widg
+                  ),
+                ],
+              )
+            ):
+            Container(),
+              Container(
+                padding: EdgeInsets.only(bottom: 20),
+                child: new TextFormField(
+                  controller: title_controller,
+                      decoration: new InputDecoration(
+                        labelText: "Product Title *",
+                        labelStyle: TextStyle(
+              // color: Color(0xff137547)
+            ),
+                        fillColor: Colors.white,
+                        //fillColor: Colors.green
+                      ),
+                      validator: (val) {
+                        if(val.length==0) {
+                          return "Title cannot be empty";
+                        }else{
+                          return null;
+                        }
+                      },
+                      keyboardType: TextInputType.emailAddress,
+              ),
+              ),
+              Container(
+                padding: EdgeInsets.only(bottom: 20),
+                child: new TextFormField(
+                  controller: desc_controller,
+                      decoration: new InputDecoration(
+                        labelText: "Description",
+                        labelStyle: TextStyle(
+            ),
+                        fillColor: Colors.white,
+                      ),
+                      validator: (val) {
+                          return null;
+                      },
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+              ),
+              ),
+              Text("Product Sell mode", style: TextStyle(color: Colors.grey.shade600, fontSize: 16),),
+              Container(
+                padding: EdgeInsets.only(bottom: 20),
+                child: new Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: <Widget>[
+                        Row(
+                          children: <Widget>[
+                            new Radio(
+                          activeColor: Color(0xff00b661),
+                          value: 0,
+                          groupValue: userOption,
+                          onChanged: onFixSet,
+                        ),
+                        new Text(
+                          'Fix Price',
+                          style: new TextStyle(fontSize: 16.0),
+                        ),
+                          ],
+                        ),
+                        Row(
+                          children: <Widget>[
+                            new Radio(
+                          activeColor: Color(0xff00b661),
+                          value: 1,
+                          groupValue: userOption,
+                          onChanged: onBidSet,
+                        ),
+                        new Text(
+                          'Bid',
+                          style: new TextStyle(
+                            fontSize: 16.0,
+                          ),
+                        ),
+                          ],
+                        )
+                      ],
+                    ),
+              ),
+              Text("Product Quality", style: TextStyle(color: Colors.grey.shade600, fontSize: 16),),
+              Container(
+                alignment: Alignment.center,
+                padding: EdgeInsets.only(top: 10, bottom: 10),
+                child: FlutterRatingBar(
+                  initialRating: 0,
+                  fillColor: Color(0xff00b661),
+                  borderColor: Color(0xff00b661).withAlpha(60),
+                  allowHalfRating: true,
+                  onRatingUpdate: (rating){
+                    productData.quality = rating;
+                  },
+                ),
+              ),
+              Container(
+                child: Row(
+                children: <Widget>[
+                  Expanded(
+                    child: Container(
+                padding: EdgeInsets.only(bottom: 20),
+                child: new TextFormField(
+                  controller: price_controller,
+                      decoration: new InputDecoration(
+                        labelText: "Price *",
+                        labelStyle: TextStyle(
+              // color: Color(0xff137547)
+                          ),
+                          fillColor: Colors.white,
+                          //fillColor: Colors.green
+                        ),
+                        validator: (val) {
+                          if(val.length==0) {
+                            return "Price cannot be empty";
+                          }else{
+                            return null;
+                          }
+                        },
+                        keyboardType: TextInputType.number,
+                ),
+              ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 10, right: 10),
+                    child: Text(" Per "),
+                  ),
+                  new DropdownButton(
+                    value: _currentUnit,
+                    items: _dropDownMenuItems,
+                    onChanged: changedDropDownItem,
+                  )
+                ],
+              ),
+              ),
+              Container(
+                padding: EdgeInsets.only(bottom: 50),
+                child: new TextFormField(
+                  controller: qua_controller,
+                      decoration: new InputDecoration(
+                        suffixText: _currentUnit,
+                        labelText: "Quantity",
+                        labelStyle: TextStyle(
+              // color: Color(0xff137547)
+            ),
+                        fillColor: Colors.white,
+                        //fillColor: Colors.green
+                      ),
+                      validator: (val){
+                        return null;
+                      },
+                      keyboardType: TextInputType.number,
+              ),
+              ),
+          ],
+        ),
+       )
+      ),
+      )
+       
+    );
+  }
+}

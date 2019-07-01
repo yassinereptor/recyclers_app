@@ -1,0 +1,271 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:1:1-38:12
+INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:1:1-38:12
+INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:1:1-38:12
+INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:1:1-38:12
+MERGED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:1:1-38:12
+MERGED from [:shared_preferences] /home/yassinereptor/Desktop/recyclers_app/build/shared_preferences/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-7:12
+MERGED from [:intro_slider] /home/yassinereptor/Desktop/recyclers_app/build/intro_slider/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-7:12
+MERGED from [:image_picker] /home/yassinereptor/Desktop/recyclers_app/build/image_picker/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-22:12
+MERGED from [:google_maps_flutter] /home/yassinereptor/Desktop/recyclers_app/build/google_maps_flutter/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-7:12
+MERGED from [:path_provider] /home/yassinereptor/Desktop/recyclers_app/build/path_provider/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-7:12
+MERGED from [:geocoder] /home/yassinereptor/Desktop/recyclers_app/build/geocoder/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:2:1-11:12
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-maps-16.1.0.aar/3d59bd4bc12349e9d396285ac4a1ae31/AndroidManifest.xml:17:1-38:12
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/97b2b68da4b27061d1c2ab4b56c71713/AndroidManifest.xml:17:1-29:12
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-tasks-16.0.1.aar/3736762e2d093a4df35ba423789a12ab/AndroidManifest.xml:2:1-9:12
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-16.0.1.aar/b533fbd190afac1d3df7f655ddeece2c/AndroidManifest.xml:17:1-28:12
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/legacy-support-v4-1.0.0.aar/a79ca7b85a95f48edc2b3e134e800bfc/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.media:media:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/media-1.0.0.aar/b86caab85bf0fc560773d2576a36ff92/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.fragment:fragment:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/fragment-1.0.0.aar/9fe610a8f1653b72287f5f6e0ab990bf/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/legacy-support-core-ui-1.0.0.aar/52f8adc00fda3fbeaa22476d4cce9dc0/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/legacy-support-core-utils-1.0.0.aar/00cc4d597108005044c6d553dc216207/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.loader:loader:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/e46b43e9271e6b2ab96682b78224261a/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/viewpager-1.0.0.aar/a43bbf2038b89bd2ee121cc5cbf962de/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-1.0.0.aar/731bda847b750e2ea02f5889ac617805/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/drawerlayout-1.0.0.aar/e988d98f79ae687b1e3ce5b6f98cc402/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-1.0.0.aar/cdcc96dd9173f5558d93580bd3f64941/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.customview:customview:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/customview-1.0.0.aar/6d958827e35817d81b12003179743109/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-1.0.0.aar/de349b7d773f76d59190df768d834d59/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-1.0.0.aar/aa4061b23fa6fdef9fa63c38058d4db4/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.core:core:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/75de3642daa6865ce4bebd6de8c166e4/AndroidManifest.xml:17:1-24:12
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/607866782ea245d88911d5b267897ca9/AndroidManifest.xml:17:1-25:12
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.0.0.aar/90eb6fee3717cf6c5c548483e30eac10/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/documentfile-1.0.0.aar/cc769a350f8a842bf7dabe39f4ff5562/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-1.0.0.aar/3ced8d8130978a0ca305239e8ad479a2/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.print:print:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/print-1.0.0.aar/8fc895f994a0a7221ea65665cbb4bfc1/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/interpolator-1.0.0.aar/f1158d9b5c23889b6671c9eb19b91098/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/cursoradapter-1.0.0.aar/63a5eaef08d58228aee37bcfd860c6ca/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.0.0.aar/0fc5f2d51db26d3b9798d801dc766f79/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/5075b3585e2a53801bcfe8a67d640b56/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/61d0877a554528e44ee16d2443107c76/AndroidManifest.xml:17:1-22:12
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/c3776a81b2c872bbdd43a41f84b3fd51/AndroidManifest.xml:17:1-22:12
+INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/debug/AndroidManifest.xml:1:1-7:12
+	package
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:2:5-26
+		INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/debug/AndroidManifest.xml
+	android:versionName
+		INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:1:1-38:12
+		INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/debug/AndroidManifest.xml
+	android:versionCode
+		INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:1:1-38:12
+		INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/debug/AndroidManifest.xml
+	xmlns:android
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:1:11-69
+uses-permission#android.permission.ACCESS_FINE_LOCATION
+ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:4:9-82
+	android:name
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:4:26-80
+uses-permission#android.permission.ACCESS_COARSE_LOCATION
+ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:5:9-84
+	android:name
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:5:26-82
+application
+ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:11:5-37:19
+MERGED from [:image_picker] /home/yassinereptor/Desktop/recyclers_app/build/image_picker/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:10:5-20:19
+MERGED from [:image_picker] /home/yassinereptor/Desktop/recyclers_app/build/image_picker/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:10:5-20:19
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-maps-16.1.0.aar/3d59bd4bc12349e9d396285ac4a1ae31/AndroidManifest.xml:30:5-36:19
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-maps-16.1.0.aar/3d59bd4bc12349e9d396285ac4a1ae31/AndroidManifest.xml:30:5-36:19
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/97b2b68da4b27061d1c2ab4b56c71713/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/97b2b68da4b27061d1c2ab4b56c71713/AndroidManifest.xml:22:5-27:19
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-tasks-16.0.1.aar/3736762e2d093a4df35ba423789a12ab/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-tasks-16.0.1.aar/3736762e2d093a4df35ba423789a12ab/AndroidManifest.xml:7:5-20
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-16.0.1.aar/b533fbd190afac1d3df7f655ddeece2c/AndroidManifest.xml:22:5-26:19
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-16.0.1.aar/b533fbd190afac1d3df7f655ddeece2c/AndroidManifest.xml:22:5-26:19
+MERGED from [androidx.core:core:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/75de3642daa6865ce4bebd6de8c166e4/AndroidManifest.xml:22:5-89
+MERGED from [androidx.core:core:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/75de3642daa6865ce4bebd6de8c166e4/AndroidManifest.xml:22:5-89
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/607866782ea245d88911d5b267897ca9/AndroidManifest.xml:22:5-23:19
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/607866782ea245d88911d5b267897ca9/AndroidManifest.xml:22:5-23:19
+	android:appComponentFactory
+		ADDED from [androidx.core:core:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/75de3642daa6865ce4bebd6de8c166e4/AndroidManifest.xml:22:18-86
+	android:label
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:13:9-28
+	android:icon
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:14:9-43
+	android:name
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:12:9-57
+meta-data#com.google.android.geo.API_KEY
+ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:15:9-16:73
+	android:value
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:16:16-71
+	android:name
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:15:20-65
+meta-data#com.google.android.gms.version
+ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:17:9-121
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-16.0.1.aar/b533fbd190afac1d3df7f655ddeece2c/AndroidManifest.xml:23:9-25:69
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-16.0.1.aar/b533fbd190afac1d3df7f655ddeece2c/AndroidManifest.xml:23:9-25:69
+	android:value
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:17:66-119
+	android:name
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:17:20-65
+activity#com.w2r.w2r.MainActivity
+ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:18:9-36:20
+	android:launchMode
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:20:13-43
+	android:hardwareAccelerated
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:23:13-47
+	android:windowSoftInputMode
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:24:13-55
+	android:configChanges
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:22:13-144
+	android:theme
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:21:13-47
+	android:name
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:19:13-41
+meta-data#io.flutter.app.android.SplashScreenUntilFirstFrame
+ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:29:13-31:40
+	android:value
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:31:17-37
+	android:name
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:30:17-82
+intent-filter#action:name:android.intent.action.MAIN+category:name:android.intent.category.LAUNCHER
+ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:32:13-35:29
+action#android.intent.action.MAIN
+ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:33:17-68
+	android:name
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:33:25-66
+category#android.intent.category.LAUNCHER
+ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:34:17-76
+	android:name
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml:34:27-74
+uses-sdk
+INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml
+INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml
+MERGED from [:shared_preferences] /home/yassinereptor/Desktop/recyclers_app/build/shared_preferences/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
+MERGED from [:shared_preferences] /home/yassinereptor/Desktop/recyclers_app/build/shared_preferences/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
+MERGED from [:intro_slider] /home/yassinereptor/Desktop/recyclers_app/build/intro_slider/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
+MERGED from [:intro_slider] /home/yassinereptor/Desktop/recyclers_app/build/intro_slider/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
+MERGED from [:image_picker] /home/yassinereptor/Desktop/recyclers_app/build/image_picker/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
+MERGED from [:image_picker] /home/yassinereptor/Desktop/recyclers_app/build/image_picker/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
+MERGED from [:google_maps_flutter] /home/yassinereptor/Desktop/recyclers_app/build/google_maps_flutter/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
+MERGED from [:google_maps_flutter] /home/yassinereptor/Desktop/recyclers_app/build/google_maps_flutter/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
+MERGED from [:path_provider] /home/yassinereptor/Desktop/recyclers_app/build/path_provider/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
+MERGED from [:path_provider] /home/yassinereptor/Desktop/recyclers_app/build/path_provider/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:5:5-44
+MERGED from [:geocoder] /home/yassinereptor/Desktop/recyclers_app/build/geocoder/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [:geocoder] /home/yassinereptor/Desktop/recyclers_app/build/geocoder/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-9:41
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-maps-16.1.0.aar/3d59bd4bc12349e9d396285ac4a1ae31/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-maps-16.1.0.aar/3d59bd4bc12349e9d396285ac4a1ae31/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/97b2b68da4b27061d1c2ab4b56c71713/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-base:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/97b2b68da4b27061d1c2ab4b56c71713/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-tasks-16.0.1.aar/3736762e2d093a4df35ba423789a12ab/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-tasks:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-tasks-16.0.1.aar/3736762e2d093a4df35ba423789a12ab/AndroidManifest.xml:5:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-16.0.1.aar/b533fbd190afac1d3df7f655ddeece2c/AndroidManifest.xml:20:5-44
+MERGED from [com.google.android.gms:play-services-basement:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-basement-16.0.1.aar/b533fbd190afac1d3df7f655ddeece2c/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/legacy-support-v4-1.0.0.aar/a79ca7b85a95f48edc2b3e134e800bfc/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-v4:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/legacy-support-v4-1.0.0.aar/a79ca7b85a95f48edc2b3e134e800bfc/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/media-1.0.0.aar/b86caab85bf0fc560773d2576a36ff92/AndroidManifest.xml:20:5-44
+MERGED from [androidx.media:media:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/media-1.0.0.aar/b86caab85bf0fc560773d2576a36ff92/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/fragment-1.0.0.aar/9fe610a8f1653b72287f5f6e0ab990bf/AndroidManifest.xml:20:5-44
+MERGED from [androidx.fragment:fragment:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/fragment-1.0.0.aar/9fe610a8f1653b72287f5f6e0ab990bf/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/legacy-support-core-ui-1.0.0.aar/52f8adc00fda3fbeaa22476d4cce9dc0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-ui:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/legacy-support-core-ui-1.0.0.aar/52f8adc00fda3fbeaa22476d4cce9dc0/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/legacy-support-core-utils-1.0.0.aar/00cc4d597108005044c6d553dc216207/AndroidManifest.xml:20:5-44
+MERGED from [androidx.legacy:legacy-support-core-utils:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/legacy-support-core-utils-1.0.0.aar/00cc4d597108005044c6d553dc216207/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/e46b43e9271e6b2ab96682b78224261a/AndroidManifest.xml:20:5-44
+MERGED from [androidx.loader:loader:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/loader-1.0.0.aar/e46b43e9271e6b2ab96682b78224261a/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/viewpager-1.0.0.aar/a43bbf2038b89bd2ee121cc5cbf962de/AndroidManifest.xml:20:5-44
+MERGED from [androidx.viewpager:viewpager:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/viewpager-1.0.0.aar/a43bbf2038b89bd2ee121cc5cbf962de/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-1.0.0.aar/731bda847b750e2ea02f5889ac617805/AndroidManifest.xml:20:5-44
+MERGED from [androidx.coordinatorlayout:coordinatorlayout:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/coordinatorlayout-1.0.0.aar/731bda847b750e2ea02f5889ac617805/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/drawerlayout-1.0.0.aar/e988d98f79ae687b1e3ce5b6f98cc402/AndroidManifest.xml:20:5-44
+MERGED from [androidx.drawerlayout:drawerlayout:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/drawerlayout-1.0.0.aar/e988d98f79ae687b1e3ce5b6f98cc402/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-1.0.0.aar/cdcc96dd9173f5558d93580bd3f64941/AndroidManifest.xml:20:5-44
+MERGED from [androidx.slidingpanelayout:slidingpanelayout:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/slidingpanelayout-1.0.0.aar/cdcc96dd9173f5558d93580bd3f64941/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/customview-1.0.0.aar/6d958827e35817d81b12003179743109/AndroidManifest.xml:20:5-44
+MERGED from [androidx.customview:customview:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/customview-1.0.0.aar/6d958827e35817d81b12003179743109/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-1.0.0.aar/de349b7d773f76d59190df768d834d59/AndroidManifest.xml:20:5-44
+MERGED from [androidx.swiperefreshlayout:swiperefreshlayout:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/swiperefreshlayout-1.0.0.aar/de349b7d773f76d59190df768d834d59/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-1.0.0.aar/aa4061b23fa6fdef9fa63c38058d4db4/AndroidManifest.xml:20:5-44
+MERGED from [androidx.asynclayoutinflater:asynclayoutinflater:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/asynclayoutinflater-1.0.0.aar/aa4061b23fa6fdef9fa63c38058d4db4/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/75de3642daa6865ce4bebd6de8c166e4/AndroidManifest.xml:20:5-44
+MERGED from [androidx.core:core:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/core-1.0.0.aar/75de3642daa6865ce4bebd6de8c166e4/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/607866782ea245d88911d5b267897ca9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.versionedparcelable:versionedparcelable:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/versionedparcelable-1.0.0.aar/607866782ea245d88911d5b267897ca9/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.0.0.aar/90eb6fee3717cf6c5c548483e30eac10/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-runtime:2.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/lifecycle-runtime-2.0.0.aar/90eb6fee3717cf6c5c548483e30eac10/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/documentfile-1.0.0.aar/cc769a350f8a842bf7dabe39f4ff5562/AndroidManifest.xml:20:5-44
+MERGED from [androidx.documentfile:documentfile:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/documentfile-1.0.0.aar/cc769a350f8a842bf7dabe39f4ff5562/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-1.0.0.aar/3ced8d8130978a0ca305239e8ad479a2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.localbroadcastmanager:localbroadcastmanager:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/localbroadcastmanager-1.0.0.aar/3ced8d8130978a0ca305239e8ad479a2/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/print-1.0.0.aar/8fc895f994a0a7221ea65665cbb4bfc1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.print:print:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/print-1.0.0.aar/8fc895f994a0a7221ea65665cbb4bfc1/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/interpolator-1.0.0.aar/f1158d9b5c23889b6671c9eb19b91098/AndroidManifest.xml:20:5-44
+MERGED from [androidx.interpolator:interpolator:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/interpolator-1.0.0.aar/f1158d9b5c23889b6671c9eb19b91098/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/cursoradapter-1.0.0.aar/63a5eaef08d58228aee37bcfd860c6ca/AndroidManifest.xml:20:5-44
+MERGED from [androidx.cursoradapter:cursoradapter:1.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/cursoradapter-1.0.0.aar/63a5eaef08d58228aee37bcfd860c6ca/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.0.0.aar/0fc5f2d51db26d3b9798d801dc766f79/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-viewmodel:2.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/lifecycle-viewmodel-2.0.0.aar/0fc5f2d51db26d3b9798d801dc766f79/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/5075b3585e2a53801bcfe8a67d640b56/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata:2.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-2.0.0.aar/5075b3585e2a53801bcfe8a67d640b56/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/61d0877a554528e44ee16d2443107c76/AndroidManifest.xml:20:5-44
+MERGED from [androidx.lifecycle:lifecycle-livedata-core:2.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/lifecycle-livedata-core-2.0.0.aar/61d0877a554528e44ee16d2443107c76/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/c3776a81b2c872bbdd43a41f84b3fd51/AndroidManifest.xml:20:5-44
+MERGED from [androidx.arch.core:core-runtime:2.0.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/core-runtime-2.0.0.aar/c3776a81b2c872bbdd43a41f84b3fd51/AndroidManifest.xml:20:5-44
+INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/debug/AndroidManifest.xml
+INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/debug/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/debug/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/main/AndroidManifest.xml
+		INJECTED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/debug/AndroidManifest.xml
+uses-permission#android.permission.INTERNET
+ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/debug/AndroidManifest.xml:6:5-66
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-maps-16.1.0.aar/3d59bd4bc12349e9d396285ac4a1ae31/AndroidManifest.xml:24:5-67
+MERGED from [com.google.android.gms:play-services-maps:16.1.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-maps-16.1.0.aar/3d59bd4bc12349e9d396285ac4a1ae31/AndroidManifest.xml:24:5-67
+	android:name
+		ADDED from /home/yassinereptor/Desktop/recyclers_app/android/app/src/debug/AndroidManifest.xml:6:22-64
+uses-permission#android.permission.READ_EXTERNAL_STORAGE
+ADDED from [:image_picker] /home/yassinereptor/Desktop/recyclers_app/build/image_picker/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:5-80
+	android:name
+		ADDED from [:image_picker] /home/yassinereptor/Desktop/recyclers_app/build/image_picker/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:7:22-77
+uses-permission#android.permission.WRITE_EXTERNAL_STORAGE
+ADDED from [:image_picker] /home/yassinereptor/Desktop/recyclers_app/build/image_picker/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:8:5-81
+	android:name
+		ADDED from [:image_picker] /home/yassinereptor/Desktop/recyclers_app/build/image_picker/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:8:22-78
+provider#io.flutter.plugins.imagepicker.ImagePickerFileProvider
+ADDED from [:image_picker] /home/yassinereptor/Desktop/recyclers_app/build/image_picker/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:11:9-19:20
+	android:grantUriPermissions
+		ADDED from [:image_picker] /home/yassinereptor/Desktop/recyclers_app/build/image_picker/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:15:13-47
+	android:authorities
+		ADDED from [:image_picker] /home/yassinereptor/Desktop/recyclers_app/build/image_picker/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:13:13-74
+	android:exported
+		ADDED from [:image_picker] /home/yassinereptor/Desktop/recyclers_app/build/image_picker/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:14:13-37
+	android:name
+		ADDED from [:image_picker] /home/yassinereptor/Desktop/recyclers_app/build/image_picker/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:12:13-82
+meta-data#android.support.FILE_PROVIDER_PATHS
+ADDED from [:image_picker] /home/yassinereptor/Desktop/recyclers_app/build/image_picker/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:16:13-18:75
+	android:resource
+		ADDED from [:image_picker] /home/yassinereptor/Desktop/recyclers_app/build/image_picker/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:18:17-72
+	android:name
+		ADDED from [:image_picker] /home/yassinereptor/Desktop/recyclers_app/build/image_picker/intermediates/merged_manifests/debug/processDebugManifest/merged/AndroidManifest.xml:17:17-67
+uses-permission#android.permission.ACCESS_NETWORK_STATE
+ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-maps-16.1.0.aar/3d59bd4bc12349e9d396285ac4a1ae31/AndroidManifest.xml:23:5-79
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-maps-16.1.0.aar/3d59bd4bc12349e9d396285ac4a1ae31/AndroidManifest.xml:23:22-76
+uses-feature#0x00020000
+ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-maps-16.1.0.aar/3d59bd4bc12349e9d396285ac4a1ae31/AndroidManifest.xml:26:5-28:35
+	android:glEsVersion
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-maps-16.1.0.aar/3d59bd4bc12349e9d396285ac4a1ae31/AndroidManifest.xml:27:9-41
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-maps-16.1.0.aar/3d59bd4bc12349e9d396285ac4a1ae31/AndroidManifest.xml:28:9-32
+uses-library#org.apache.http.legacy
+ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-maps-16.1.0.aar/3d59bd4bc12349e9d396285ac4a1ae31/AndroidManifest.xml:33:9-35:40
+	android:required
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-maps-16.1.0.aar/3d59bd4bc12349e9d396285ac4a1ae31/AndroidManifest.xml:35:13-37
+	android:name
+		ADDED from [com.google.android.gms:play-services-maps:16.1.0] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-maps-16.1.0.aar/3d59bd4bc12349e9d396285ac4a1ae31/AndroidManifest.xml:34:13-50
+activity#com.google.android.gms.common.api.GoogleApiActivity
+ADDED from [com.google.android.gms:play-services-base:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/97b2b68da4b27061d1c2ab4b56c71713/AndroidManifest.xml:23:9-26:75
+	android:exported
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/97b2b68da4b27061d1c2ab4b56c71713/AndroidManifest.xml:25:13-37
+	android:theme
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/97b2b68da4b27061d1c2ab4b56c71713/AndroidManifest.xml:26:13-72
+	android:name
+		ADDED from [com.google.android.gms:play-services-base:16.0.1] /home/yassinereptor/.gradle/caches/transforms-1/files-1.1/jetified-play-services-base-16.0.1.aar/97b2b68da4b27061d1c2ab4b56c71713/AndroidManifest.xml:24:13-79
