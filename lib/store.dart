@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
 import 'package:recyclers/config/config.dart';
+import 'package:recyclers/home.dart';
 import 'package:recyclers/models/product.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 
@@ -113,7 +114,9 @@ buildCat(IconData icon)
       this._pageLoadController.reset();
       await Future.value({});
     },
-    child: PagewiseListView(
+    child: ScrollConfiguration(
+      behavior: ScrollBehaviorCos(),
+      child: PagewiseListView(
                         itemBuilder: this._itemBuilder,
                         pageLoadController: this._pageLoadController,
                         loadingBuilder: (context) {
@@ -123,6 +126,7 @@ buildCat(IconData icon)
                           return Text('No Items Found');
                         },
                       ),
+    )
   )
         ),
       )
@@ -133,6 +137,9 @@ buildCat(IconData icon)
 
 
     Widget _itemBuilder(context, ProductModel entry, _) {
+      print("++++++++++++++++++++++++++++++++++++++++++++++++++");
+      print("${entry.id}");
+      print("++++++++++++++++++++++++++++++++++++++++++++++++++");
     return Container(
       padding: EdgeInsets.only(left: 5, right: 5, top: 5, bottom: 5),
       margin: EdgeInsets.only(left: 5, right: 5, top: 3, bottom: 3),
@@ -150,29 +157,7 @@ buildCat(IconData icon)
          GestureDetector(
           onTap: (){
             Navigator.of(context).push(MaterialPageRoute<void>(
-              builder: (BuildContext context) {
-                print("=------------${entry.id}-------------=");
-                return Scaffold(
-                  appBar: AppBar(
-                    title: const Text('Flippers Page'),
-                  ),
-                  body: Container(
-                    // The blue background emphasizes that it's a new route.
-                    color: Colors.lightBlueAccent,
-                    padding: const EdgeInsets.all(16.0),
-                    alignment: Alignment.topLeft,
-                    child: Hero(
-                      tag: entry.id,
-                      child: CachedNetworkImage(
-                      imageUrl: "http://${AppConfig.ip}/products/${entry.user_id}/${entry.image}",
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => new CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => new Icon(Icons.error),
-                  ),
-                    )
-                  ),
-                );
-              }
+              builder: (BuildContext context)=> PhotoHero(entry: entry,)
             ));
           },
            child:  Hero(
@@ -319,7 +304,6 @@ buildCat(IconData icon)
 
 
 
-
 class BackendService {
   
   static Future<List<ProductModel>> getProduct(offset, limit) async {
@@ -354,7 +338,7 @@ class ProductModel {
       print("-------------------------------------------");
       print(obj);
       print("-------------------------------------------");
-    this.id = obj["id"];
+    this.id = obj["_id"];
     this.title = obj["title"];
     this.desc = obj["desc"];    
     this.user_id = obj["user_id"];
@@ -430,5 +414,57 @@ class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
               ],
             ),
     );
+  }
+}
+
+
+class PhotoHero extends StatefulWidget {
+
+  var entry;
+PhotoHero({@required this.entry});
+
+  @override
+  _PhotoHeroState createState() => _PhotoHeroState();
+}
+
+class _PhotoHeroState extends State<PhotoHero> {
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        iconTheme: IconThemeData(
+          color: Colors.white
+        ),
+      ),
+                  body: Container(
+                    color: Colors.black,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Container(
+                    // The blue background emphasizes that it's a new route.
+                    alignment: Alignment.center,
+                    child: Hero(
+                      tag: widget.entry.id,
+                      child: CachedNetworkImage(
+                      imageUrl: "http://${AppConfig.ip}/products/${widget.entry.user_id}/${widget.entry.image}",
+                      fit: BoxFit.cover,
+                      placeholder: (context, url) => new CircularProgressIndicator(),
+                      errorWidget: (context, url, error) => new Icon(Icons.error),
+                  ),
+                    )
+                  ),
+                  Container(
+                    padding: EdgeInsets.only(top: 20),
+                    child: Text(widget.entry.title, style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 20
+                    ),),
+                  )
+                    ],
+                  ),
+                  )
+                );
   }
 }
