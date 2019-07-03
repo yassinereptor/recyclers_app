@@ -26,11 +26,14 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
 @override
   void initState() {
     _dropDownMenuItems = getDropDownMenuItems();
+    _dropDownMenuCats = getDropDownMenuCats();
     _currentUnit = _dropDownMenuItems[0].value;
+    _currentCat = _dropDownMenuCats[0].value;
 
       userOption = 0;
       productData = new ProductData();
       productData.unit = 1;
+      productData.cat = 1;
     super.initState();
 
   }
@@ -43,8 +46,13 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
   List units =
   ["Unit", "Gram", "Ounce", "Kg", "Ton", "Lb", "liter", "meter"];
 
+  List cats =
+  ["Bottles", "Paper", "Oil", "Organic", "Wood", "Food", "Other"];
+
   List<DropdownMenuItem<String>> _dropDownMenuItems;
+  List<DropdownMenuItem<String>> _dropDownMenuCats;
   String _currentUnit;
+  String _currentCat;
 
   TextEditingController title_controller = new TextEditingController();
   TextEditingController desc_controller = new TextEditingController();
@@ -54,6 +62,17 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
   List<DropdownMenuItem<String>> getDropDownMenuItems() {
     List<DropdownMenuItem<String>> items = new List();
     for (String item in units) {
+      items.add(new DropdownMenuItem(
+          value: item,
+          child: new Text(item)
+      ));
+    }
+    return items;
+  }
+
+  List<DropdownMenuItem<String>> getDropDownMenuCats() {
+    List<DropdownMenuItem<String>> items = new List();
+    for (String item in cats) {
       items.add(new DropdownMenuItem(
           value: item,
           child: new Text(item)
@@ -100,6 +119,14 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
     setState(() {
       _currentUnit = selectedCity;
       productData.unit = units.indexOf(selectedCity) + 1;
+    });
+  }
+
+  void changedDropDownCat(String cat) {
+    print("Selected city $units.indexOf(cat), we are going to refresh the UI");
+    setState(() {
+      _currentCat = cat;
+      productData.cat = cats.indexOf(cat) + 1;
     });
   }
 
@@ -179,6 +206,7 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
             "bid": productData.bid,
             "images": productData.images,
             "unit": productData.unit,
+            "cat": productData.cat,
             "time": new DateTime.now().toString(),
           },
           options: Options(headers: {
@@ -377,6 +405,11 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
                     productData.quality = rating;
                   },
                 ),
+              ),
+              DropdownButton(
+                value: _currentCat,
+                items: _dropDownMenuCats,
+                onChanged: changedDropDownCat,
               ),
               Container(
                 child: Row(

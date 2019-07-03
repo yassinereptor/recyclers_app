@@ -11,7 +11,7 @@ class ProductData{
   String title, description;
   double quality, price;
   bool fix, bid;
-  int quantity, unit;
+  int quantity, unit, cat;
 
 }
 
@@ -51,6 +51,39 @@ class ProductUnit{
         break;
        case 8:
         return "Meter";
+        break;
+    }
+  }
+}
+
+class ProductCat{
+  static int BOTTLE = 1;
+  static int PAPER = 2;
+  static int OIL = 3;
+  static int WOOD = 4;
+  static int FOOD = 5;
+  static int OTHER = 6;
+
+  static getCat(int i)
+ {
+    switch (i) {
+       case 1:
+        return "Bottles";
+        break;
+       case 2:
+        return "Paper";
+        break;
+       case 3:
+        return "Oil";
+        break;
+       case 4:
+        return "Wood";
+        break;
+       case 5:
+        return "Food";
+        break;
+       case 6:
+        return "Other";
         break;
     }
   }

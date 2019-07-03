@@ -15,6 +15,9 @@ class StoreScreen extends StatefulWidget {
 
 class _StoreScreenState extends State<StoreScreen> {
 
+static String filter;
+static List<int> fil_cat;
+
 @override
   void initState() {
     _pageLoadController.addListener(() {
@@ -26,8 +29,9 @@ class _StoreScreenState extends State<StoreScreen> {
       );
     }
   });
+  filter = "time";
+  fil_cat = new List();
     super.initState();
-
   }
 
   static const int PAGE_SIZE = 10;
@@ -35,10 +39,12 @@ class _StoreScreenState extends State<StoreScreen> {
 final _pageLoadController = PagewiseLoadController(
   pageSize: PAGE_SIZE,
   pageFuture: (pageIndex) =>
-            BackendService.getProduct(pageIndex * PAGE_SIZE, PAGE_SIZE),
+            BackendService.getProduct(fil_cat, filter, pageIndex * PAGE_SIZE, PAGE_SIZE),
 );
 
-buildCat(IconData icon)
+List<bool> cats = [false, false, false, false, false, false];
+
+buildCat(IconData icon, int i)
 {
   return Container(
     alignment: Alignment.center,
@@ -46,13 +52,28 @@ buildCat(IconData icon)
             width: 40,
             padding: EdgeInsets.only(bottom: 2, right: 3),
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: (cats[i] == true)? Color(0xff00b661) : Colors.white,
               shape: BoxShape.circle,
               boxShadow: [
                 BoxShadow(color: Colors.black26, offset: Offset.zero, blurRadius: 2, spreadRadius: 0),
               ],
             ),
-            child: IconButton(icon: Icon(icon, size: 22,), onPressed: (){}, alignment: Alignment.center,),
+            child: IconButton(icon: Icon(icon, size: 22, color: (cats[i] == true)? Colors.white: Color(0xff054a29),), onPressed: (){
+              setState(() {
+                cats[i] = !cats[i];               
+              });
+              setState(() async{
+                int j = 1;
+                fil_cat.clear();
+                cats.forEach((item){
+                  if(item)
+                    fil_cat.add(j);
+                  j++;
+                });
+                this._pageLoadController.reset();
+                await Future.value({});
+              });
+            }, alignment: Alignment.center,),
           );
   }
 
@@ -85,12 +106,12 @@ buildCat(IconData icon)
                     child: Wrap(
                     spacing: 15,
                     children: <Widget>[
-                      buildCat(IconData(0xe963, fontFamily: "Iconmoon")),
-                      buildCat(IconData(0xe986, fontFamily: "Iconmoon")),
-                      buildCat(IconData(0xe927, fontFamily: "Iconmoon")),
-                      buildCat(IconData(0xe948, fontFamily: "Iconmoon")),
-                      buildCat(IconData(0xe99e, fontFamily: "Iconmoon")),
-                      buildCat(IconData(0xe963, fontFamily: "Iconmoon")),
+                      buildCat(IconData(0xe963, fontFamily: "Iconmoon"), 0),
+                      buildCat(IconData(0xe986, fontFamily: "Iconmoon"), 1),
+                      buildCat(IconData(0xe927, fontFamily: "Iconmoon"), 2),
+                      buildCat(IconData(0xe948, fontFamily: "Iconmoon"), 3),
+                      buildCat(IconData(0xe99e, fontFamily: "Iconmoon"), 4),
+                      buildCat(IconData(0xe928, fontFamily: "Iconmoon"), 5),
                     ],
                   ),
                   ),
@@ -314,10 +335,11 @@ buildCat(IconData icon)
 
 class BackendService {
   
-  static Future<List<ProductModel>> getProduct(offset, limit) async {
+  static Future<List<ProductModel>> getProduct(fil_cat, filter, offset, limit) async {
     Dio dio = new Dio();
     final responseBody = (await dio.post("http://${AppConfig.ip}/api/product/load", data: {
-            "filter": "time",
+            "cats": fil_cat,
+            "filter": filter,
             "skip": offset,
             "limit": limit
           }
