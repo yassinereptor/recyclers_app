@@ -61,7 +61,7 @@ class ProductCat{
   static int PAPER = 2;
   static int OIL = 3;
   static int WOOD = 4;
-  static int FOOD = 5;
+  static int ORGANIC = 5;
   static int OTHER = 6;
 
   static getCat(int i)
@@ -80,7 +80,7 @@ class ProductCat{
         return "Wood";
         break;
        case 5:
-        return "Food";
+        return "Organic";
         break;
        case 6:
         return "Other";

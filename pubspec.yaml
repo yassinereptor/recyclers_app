@@ -39,6 +39,7 @@ dependencies:
   hidden_drawer_menu: ^1.1.1
   extended_image: ^0.5.1
   cached_network_image: ^1.0.0
+  carousel_slider: ^1.3.0
   
 dev_dependencies:
   flutter_test:

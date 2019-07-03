@@ -5,6 +5,7 @@ import 'package:recyclers/config/config.dart';
 import 'package:recyclers/home.dart';
 import 'package:recyclers/models/product.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:recyclers/product.dart';
 
 class StoreScreen extends StatefulWidget {
   StoreScreen({Key key}) : super(key: key);
@@ -161,7 +162,13 @@ buildCat(IconData icon, int i)
       print("++++++++++++++++++++++++++++++++++++++++++++++++++");
       print("${entry.id}");
       print("++++++++++++++++++++++++++++++++++++++++++++++++++");
-    return Container(
+    return GestureDetector(
+      onTap: (){
+         Navigator.of(context).push(MaterialPageRoute<void>(
+              builder: (BuildContext context)=> ProductScreen(entry: entry,)
+            ));
+      },
+      child: Container(
       padding: EdgeInsets.only(left: 0, right: 5, top: 0, bottom: 0),
       margin: EdgeInsets.only(left: 5, right: 5, top: 6, bottom: 6),
       decoration: BoxDecoration(
@@ -203,7 +210,7 @@ buildCat(IconData icon, int i)
                     image: DecorationImage(
                         fit: BoxFit.cover,
                       image: CachedNetworkImageProvider(
-                        "http://${AppConfig.ip}/products/${entry.user_id}/${entry.image}",
+                        "http://${AppConfig.ip}/products/${entry.user_id}/${entry.image[0]}",
                         errorListener: (){
                           
                         }
@@ -327,6 +334,7 @@ buildCat(IconData icon, int i)
           )
         ],
       )
+    ),
     );
   }
 }
@@ -362,7 +370,7 @@ class ProductModel {
   bool bid;
   int quantity;
   int unit;
-  String image;
+  var image;
 
 
   ProductModel.fromJson(obj) {
@@ -379,7 +387,7 @@ class ProductModel {
     this.quality = obj["quality"].toString();
     this.quantity = obj["quantity"];
     this.unit = obj["unit"];
-    this.image = obj["images"][0];
+    this.image = obj["images"];
     this.fix = obj["fix"];
     this.bid = obj["bid"];
 
@@ -461,6 +469,15 @@ PhotoHero({@required this.entry});
 }
 
 class _PhotoHeroState extends State<PhotoHero> {
+
+  @override
+    void initState() {
+      // TODO: implement initState
+      super.initState();
+  //       print("()()()()()(()((()()()(");
+  // print(widget.entry.image);
+    }
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -481,7 +498,7 @@ class _PhotoHeroState extends State<PhotoHero> {
                     child: Hero(
                       tag: widget.entry.id,
                       child: CachedNetworkImage(
-                      imageUrl: "http://${AppConfig.ip}/products/${widget.entry.user_id}/${widget.entry.image}",
+                      imageUrl: "http://${AppConfig.ip}/products/${widget.entry.user_id}/${widget.entry.image[0]}",
                       fit: BoxFit.cover,
                       placeholder: (context, url) => new CircularProgressIndicator(),
                       errorWidget: (context, url, error) => new Icon(Icons.error),

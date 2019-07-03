@@ -47,7 +47,7 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
   ["Unit", "Gram", "Ounce", "Kg", "Ton", "Lb", "liter", "meter"];
 
   List cats =
-  ["Bottles", "Paper", "Oil", "Organic", "Wood", "Food", "Other"];
+  ["Bottles", "Paper", "Oil", "Wood", "Organic", "Other"];
 
   List<DropdownMenuItem<String>> _dropDownMenuItems;
   List<DropdownMenuItem<String>> _dropDownMenuCats;
