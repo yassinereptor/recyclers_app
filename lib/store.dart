@@ -6,6 +6,7 @@ import 'package:recyclers/home.dart';
 import 'package:recyclers/models/product.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:recyclers/product.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class StoreScreen extends StatefulWidget {
   StoreScreen({Key key}) : super(key: key);
@@ -247,7 +248,7 @@ buildCat(IconData icon, int i)
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             Text(entry.title, style: TextStyle(
-                          fontSize: 20
+                          fontSize: 18
                         ),),
                         Text("by ${entry.user_name}", style: TextStyle(
                           fontSize: 12,
@@ -264,7 +265,15 @@ buildCat(IconData icon, int i)
                       ),
                       child: Row(
                         children: <Widget>[
-                          Icon(Icons.star, color: Colors.yellow[800],),
+                          Container(
+                            margin: EdgeInsets.only(right: 2),
+                          child: Icon(Icons.timelapse, color: Color(0xff00b661), size: 18,),
+                          ),
+                          Text("${timeago.format(DateTime.parse(entry.time), locale: 'en_short')}", style: TextStyle(
+                            color: Color(0xff00b661)
+                          ),),
+                          Text(" | ", style: TextStyle(fontSize: 20, color: Colors.grey[200]),),
+                          Icon(Icons.star, color: Colors.yellow[800], size: 20,),
                           Text(entry.quality, style: TextStyle(color: Colors.yellow[800]),)
                         ],
                       ),
@@ -288,7 +297,7 @@ buildCat(IconData icon, int i)
                         Flexible(
                           child: Text("${entry.price} ", style: TextStyle(
                           color: Color(0xff00b661),
-                          fontSize: 18
+                          fontSize: 16
                         ),),
                         ),
                         Flexible(
@@ -366,10 +375,12 @@ class ProductModel {
   String desc;
   String price;
   String quality;
+  String time;
   bool fix;
   bool bid;
   int quantity;
   int unit;
+  int cat;
   var image;
 
 
@@ -390,6 +401,8 @@ class ProductModel {
     this.image = obj["images"];
     this.fix = obj["fix"];
     this.bid = obj["bid"];
+    this.time = obj["time"];
+    this.cat = obj["cat"];
 
   }
 
@@ -398,65 +411,6 @@ class ProductModel {
   }
 }
 
-
-class DescriptionTextWidget extends StatefulWidget {
-  final String text;
-
-  DescriptionTextWidget({@required this.text});
-
-  @override
-  _DescriptionTextWidgetState createState() => new _DescriptionTextWidgetState();
-}
-
-class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
-  String firstHalf;
-  String secondHalf;
-
-  bool flag = true;
-
-  @override
-  void initState() {
-    super.initState();
-
-    if (widget.text.length > 50) {
-      firstHalf = widget.text.substring(0, 50);
-      secondHalf = widget.text.substring(50, widget.text.length);
-    } else {
-      firstHalf = widget.text;
-      secondHalf = "";
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return new Container(
-      padding: new EdgeInsets.symmetric(horizontal: 10.0, vertical: 10.0),
-      child: secondHalf.isEmpty
-          ? new Text(firstHalf)
-          : new Column(
-              children: <Widget>[
-                new Text(flag ? (firstHalf + "...") : (firstHalf + secondHalf)),
-                new InkWell(
-                  child: new Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: <Widget>[
-                      new Text(
-                        flag ? "show more" : "show less",
-                        style: new TextStyle(color: Colors.blue),
-                      ),
-                    ],
-                  ),
-                  onTap: () {
-                    setState(() {
-                      flag = !flag;
-                    });
-                  },
-                ),
-              ],
-            ),
-    );
-  }
-}
 
 
 class PhotoHero extends StatefulWidget {
@@ -509,7 +463,7 @@ class _PhotoHeroState extends State<PhotoHero> {
                     padding: EdgeInsets.only(top: 20),
                     child: Text(widget.entry.title, style: TextStyle(
                       color: Colors.white,
-                      fontSize: 20
+                      fontSize: 18
                     ),),
                   )
                     ],
