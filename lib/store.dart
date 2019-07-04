@@ -1,12 +1,14 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:recyclers/config/config.dart';
 import 'package:recyclers/home.dart';
 import 'package:recyclers/models/product.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:recyclers/product.dart';
 import 'package:timeago/timeago.dart' as timeago;
+import 'package:flutter_slidable/flutter_slidable.dart';
 
 class StoreScreen extends StatefulWidget {
   StoreScreen({Key key}) : super(key: key);
@@ -163,7 +165,53 @@ buildCat(IconData icon, int i)
       print("++++++++++++++++++++++++++++++++++++++++++++++++++");
       print("${entry.id}");
       print("++++++++++++++++++++++++++++++++++++++++++++++++++");
-    return GestureDetector(
+    return Slidable(
+      actionPane: SlidableDrawerActionPane(),
+      actionExtentRatio: 0.25,
+      secondaryActions: <Widget>[
+        Container(
+          child: Container(
+                      padding: EdgeInsets.only(
+                        right: 15,
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: <Widget>[
+                          Container(
+                            padding: EdgeInsets.only(top: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                child: Icon(Icons.timelapse, color: Color(0xff00b661), size: 18,),
+                                ),
+                                Text("${timeago.format(DateTime.parse(entry.time), locale: 'en_short')}", style: TextStyle(
+                                  color: Color(0xff00b661), fontSize: 15
+                                ),),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: EdgeInsets.only(bottom: 20),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: <Widget>[
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Icon(Icons.star, color: Colors.yellow[800], size: 20,),
+                                ),
+                                Text("${entry.quality}/5", style: TextStyle(color: Colors.yellow[800], fontSize: 15),)
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+        ),
+      ],
+      child: GestureDetector(
       onTap: (){
          Navigator.of(context).push(MaterialPageRoute<void>(
               builder: (BuildContext context)=> ProductScreen(entry: entry,)
@@ -259,25 +307,7 @@ buildCat(IconData icon, int i)
                    
                       )
                     ),
-                    Container(
-                      padding: EdgeInsets.only(
-                        right: 5,
-                      ),
-                      child: Row(
-                        children: <Widget>[
-                          Container(
-                            margin: EdgeInsets.only(right: 2),
-                          child: Icon(Icons.timelapse, color: Color(0xff00b661), size: 18,),
-                          ),
-                          Text("${timeago.format(DateTime.parse(entry.time), locale: 'en_short')}", style: TextStyle(
-                            color: Color(0xff00b661)
-                          ),),
-                          Text(" | ", style: TextStyle(fontSize: 20, color: Colors.grey[200]),),
-                          Icon(Icons.star, color: Colors.yellow[800], size: 20,),
-                          Text(entry.quality, style: TextStyle(color: Colors.yellow[800]),)
-                        ],
-                      ),
-                    )
+                    Icon(Icons.keyboard_return, color: Colors.grey[200], size: 15)
                   ],
                 ),
 
@@ -303,6 +333,7 @@ buildCat(IconData icon, int i)
                         Flexible(
                           child: Text("Dh / ${ProductUnit.getUnit(entry.unit)}", style: TextStyle(
                           color: Color(0xff00b661),
+                          fontSize: 12,
                         ),),
                         )
                       ],
@@ -343,6 +374,7 @@ buildCat(IconData icon, int i)
           )
         ],
       )
+    ),
     ),
     );
   }
@@ -451,12 +483,9 @@ class _PhotoHeroState extends State<PhotoHero> {
                     alignment: Alignment.center,
                     child: Hero(
                       tag: widget.entry.id,
-                      child: CachedNetworkImage(
-                      imageUrl: "http://${AppConfig.ip}/products/${widget.entry.user_id}/${widget.entry.image[0]}",
-                      fit: BoxFit.cover,
-                      placeholder: (context, url) => new CircularProgressIndicator(),
-                      errorWidget: (context, url, error) => new Icon(Icons.error),
-                  ),
+                      child: PhotoView(
+                        imageProvider: CachedNetworkImageProvider("http://${AppConfig.ip}/products/${widget.entry.user_id}/${widget.entry.image[0]}"),
+                      ),
                     )
                   ),
                   Container(

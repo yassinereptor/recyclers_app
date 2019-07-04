@@ -1,8 +1,17 @@
+import 'dart:convert';
+
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_pagewise/flutter_pagewise.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:recyclers/config/config.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:recyclers/home.dart';
 import 'package:recyclers/models/product.dart';
+import 'package:photo_view/photo_view.dart';
+import 'package:recyclers/store.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class ProductScreen extends StatefulWidget {
 
@@ -18,15 +27,74 @@ class _ProductScreenState extends State<ProductScreen> {
   List<int> list;
   int _current = 0;
 
+  static String id;
+
   @override
     void initState() {
       // list = new List(widget.entry.image.length);
+      _pageLoadController.addListener(() {
+    if (!_pageLoadController.hasMoreItems) {
+      Scaffold.of(context).showSnackBar(
+        SnackBar(
+          content: Text('No More Items!')
+        )
+      );
+    }
+  });
       int i = 0;
       list = new List();
       while(i < widget.entry.image.length)
         list.add(i++);
+      id = widget.entry.id;
+      rate = 0;
       super.initState();
     }
+
+
+onSendReviewPress()
+async {
+  print("${rate} ${rev_controller.text}");
+  if(rev_controller.text.isNotEmpty)
+  {
+    Dio dio = new Dio();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+      var obj = prefs.getString("user_data");
+      if(obj != null)
+      {
+          
+        Map<String, dynamic> tmp = jsonDecode(obj);
+        dio.post("http://${AppConfig.ip}/api/product/review", data: {
+              "post_user_id": widget.entry.user_id,
+              "user_id": tmp["user"]["_id"],
+              "post_id": widget.entry.id,
+              "text": rev_controller.text,
+              "rate": rate,
+              "time": new DateTime.now().toString()
+          }).then((data){
+            print(data);
+          });
+      }
+   
+  }
+  setState(() {
+      rev_controller.text = "";
+      rate = 0.0;
+    });
+}
+
+
+static const int PAGE_SIZE = 10;
+
+  TextEditingController rev_controller = new TextEditingController();
+  final _formKey = GlobalKey<FormState>();
+  var rate;
+
+
+final _pageLoadController = PagewiseLoadController(
+  pageSize: PAGE_SIZE,
+  pageFuture: (pageIndex) =>
+            BackendReviewService.getReview(id, pageIndex * PAGE_SIZE, PAGE_SIZE),
+);
 
 
   @override
@@ -45,12 +113,55 @@ class _ProductScreenState extends State<ProductScreen> {
         child: Container(
           height: 75,
           padding: EdgeInsets.only(left: 20, right: 20, top: 10),
-          child: Text("Price"),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: Text("Price:"),
+                  ),
+                  Container(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Text("${widget.entry.price}", style: TextStyle(
+                          color: Color(0xff00b661),
+                          fontSize: 20
+                        ),),
+                        Text(" Dh / ${ProductUnit.getUnit(widget.entry.unit)}", style: TextStyle(
+                          color: Color(0xff00b661)
+                          ),
+                        ),
+                      ],
+                    )
+                  )
+                ],
+              ),
+              Container(
+                child: FlatButton(
+                    onPressed: (){},
+                    color: Color(0xff00b661),
+                    shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(50.0)),
+                    child: Container(
+                      height: 25,
+                      alignment: Alignment.center,
+                      child: Text("CheckOut", style: TextStyle(
+                      color: Colors.white,
+                    ),
+                    )),
+                  ),
+              )
+            ],
+          ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-        child: Column(
+      body: NestedScrollView(
+         headerSliverBuilder: (context, inn){
+          return <Widget>[
+              SliverToBoxAdapter(
+                child: Column(
         children: <Widget>[
           Container(
             color: Color(0xff00b661),
@@ -77,9 +188,11 @@ class _ProductScreenState extends State<ProductScreen> {
                 child: Container(
                     // The blue background emphasizes that it's a new route.
                     alignment: Alignment.center,
-                    child: Hero(
-                      tag: widget.entry.id,
-                      child: Container(
+                      child: InkWell(
+                        onTap: (){
+                            Navigator.push(context, MaterialPageRoute( builder: (context) => PhotoHeroProduct(entry: "http://${AppConfig.ip}/products/${widget.entry.user_id}/${widget.entry.image[i]}", id: widget.entry.id),));
+                        },
+                        child: Container(
                         decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(5)),                          
                           image: DecorationImage(
@@ -88,7 +201,8 @@ class _ProductScreenState extends State<ProductScreen> {
                           )
                         ),
                       )
-                    )
+                      
+                    ),
                 )
               );
             },
@@ -188,44 +302,123 @@ fontSize: 15
             ],
           ),
         ),
-        Divider()
+        Divider(),
+        Container(
+          alignment: Alignment.centerLeft,
+          child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+              Text("Reviews", style: TextStyle(
+                    fontFamily: "Oswald",
+                    fontSize: 20,
+                    color: Colors.black
+                  ),),
+            Text("Write your review", style: TextStyle(
+              fontFamily: "Oswald",
+              fontSize: 12,
+              color: Color(0xff00b661)
+            ),),
+              ],
+            ),
+        ),
+        Container(
+          margin: EdgeInsets.only(bottom: 20),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: <Widget>[
+                Container(
+            padding: EdgeInsets.only(top: 15),
+            child: FlutterRatingBar(
+            itemSize: 30,
+                  initialRating: double.parse(rate.toString()),
+                  fillColor: Color(0xff00b661),
+                  borderColor: Color(0xff00b661).withAlpha(60),
+                  allowHalfRating: true,
+                  onRatingUpdate: (rating){
+                    rate = rating;
+                  },
+                ),
+          ),
+                Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.end,
+            children: <Widget>[
+                Expanded(
+                  child: Container(
+
+                child: new TextFormField(
+                  controller: rev_controller,
+                      decoration: new InputDecoration(
+                        labelText: "...",
+                        labelStyle: TextStyle(
+            ),
+                        fillColor: Colors.white,
+                      ),
+                      validator: (val) {
+                          return null;
+                      },
+                      keyboardType: TextInputType.multiline,
+                      maxLines: null,
+              ),
+              ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 5),
+              child: FlatButton(
+                    onPressed: onSendReviewPress,
+                    shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(50.0)),
+                    child: Container(
+                      alignment: Alignment.center,
+                      child: Text("Send", style: TextStyle(
+                      color: Color(0xff00b661),
+                    ),
+                    )),
+                  ),
+            )
+            ],
+          ),
+          
+              ],
+            )
+          )
+        ),
+         Divider(),
              ],
            ),
          )
         ],
       ),
+              )
+             
+          ];
+          } ,
+          body: Container(
+        child: Container(
+          child: ScrollConfiguration(
+      behavior: ScrollBehaviorCos(),
+      child: PagewiseListView(
+                        itemBuilder: this._itemBuilder,
+                        pageLoadController: this._pageLoadController,
+                        loadingBuilder: (context) {
+                          return Text('Loading...');
+                        },
+                        noItemsFoundBuilder: (context) {
+                          return Text('No Items Found');
+                        },
+                      ),
+    ),
+        )
       ),
       )
       
-                  // body: Container(
-                  //   color: Colors.black,
-                  //   child: Column(
-                  //     mainAxisAlignment: MainAxisAlignment.center,
-                  //   children: <Widget>[
-                  //     Container(
-                  //   // The blue background emphasizes that it's a new route.
-                  //   alignment: Alignment.center,
-                  //   child: Hero(
-                  //     tag: widget.entry.id,
-                  //     child: CachedNetworkImage(
-                  //     imageUrl: "http://${AppConfig.ip}/products/${widget.entry.user_id}/${widget.entry.image[0]}",
-                  //     fit: BoxFit.cover,
-                  //     placeholder: (context, url) => new CircularProgressIndicator(),
-                  //     errorWidget: (context, url, error) => new Icon(Icons.error),
-                  // ),
-                  //   )
-                  // ),
-                  // Container(
-                  //   padding: EdgeInsets.only(top: 20),
-                  //   child: Text(widget.entry.title, style: TextStyle(
-                  //     color: Colors.white,
-                  //     fontSize: 20
-                  //   ),),
-                  // )
-                  //   ],
-                  // ),
-                  // )
                 );
+  }
+
+
+
+  Widget _itemBuilder(context, ReviewModel entry, _) {
+    return Text("Hello");
   }
 }
 
@@ -304,5 +497,103 @@ class _DescriptionTextWidgetState extends State<DescriptionTextWidget> {
               ],
             ),
     );
+  }
+}
+
+
+class PhotoHeroProduct extends StatefulWidget {
+
+  String entry;
+  String id;
+PhotoHeroProduct({@required this.entry, @required this.id});
+
+  @override
+  _PhotoHeroProductState createState() => _PhotoHeroProductState();
+}
+
+class _PhotoHeroProductState extends State<PhotoHeroProduct> {
+
+  @override
+    void initState() {
+      super.initState();
+    }
+
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        iconTheme: IconThemeData(
+          color: Colors.white
+        ),
+      ),
+                  body: Container(
+                    color: Colors.black,
+                    child: Container(
+                    alignment: Alignment.center,
+                    child: Hero(
+                      tag: widget.id,
+                      child: PhotoView(
+                        imageProvider: CachedNetworkImageProvider(widget.entry),
+                      ),
+                     
+                    )
+                  ),
+                  )
+                );
+  }
+}
+
+
+
+class BackendReviewService {
+  
+  static Future<List<ReviewModel>> getReview(id, offset, limit) async {
+    Dio dio = new Dio();
+    final responseBody = (await dio.post("http://${AppConfig.ip}/api/product/review/load", data: {
+            "post_user_id": id,
+            "limit": limit,
+            "offset": offset
+          }
+    )).data;
+   
+    print(responseBody);
+    return ReviewModel.fromJsonList(responseBody);
+  }
+}
+
+class ReviewModel {
+  String id;
+  String title;
+  String user_id;
+  String user_name;
+  String desc;
+  String price;
+
+
+
+  ReviewModel.fromJson(obj) {
+
+    print(obj);
+
+    // this.id = obj["_id"];
+    // this.title = obj["title"];
+    // this.desc = obj["desc"];    
+    // this.user_id = obj["user_id"];
+    // this.user_name = obj["user_name"];
+    // this.price = obj["price"].toString();
+    // this.quality = obj["quality"].toString();
+    // this.quantity = obj["quantity"];
+    // this.unit = obj["unit"];
+    // this.image = obj["images"];
+    // this.fix = obj["fix"];
+    // this.bid = obj["bid"];
+    // this.time = obj["time"];
+    // this.cat = obj["cat"];
+
+  }
+
+  static List<ReviewModel> fromJsonList(jsonList) {
+    return jsonList.map<ReviewModel>((obj) => ReviewModel.fromJson(obj)).toList();
   }
 }
