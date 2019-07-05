@@ -475,10 +475,7 @@ class _PhotoHeroState extends State<PhotoHero> {
       ),
                   body: Container(
                     color: Colors.black,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Container(
+                    child: Container(
                     // The blue background emphasizes that it's a new route.
                     alignment: Alignment.center,
                     child: Hero(
@@ -487,15 +484,6 @@ class _PhotoHeroState extends State<PhotoHero> {
                         imageProvider: CachedNetworkImageProvider("http://${AppConfig.ip}/products/${widget.entry.user_id}/${widget.entry.image[0]}"),
                       ),
                     )
-                  ),
-                  Container(
-                    padding: EdgeInsets.only(top: 20),
-                    child: Text(widget.entry.title, style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 18
-                    ),),
-                  )
-                    ],
                   ),
                   )
                 );

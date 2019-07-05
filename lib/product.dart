@@ -12,6 +12,8 @@ import 'package:recyclers/models/product.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:recyclers/store.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:timeago/timeago.dart' as timeago;
+
 
 class ProductScreen extends StatefulWidget {
 
@@ -32,22 +34,14 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
     void initState() {
       // list = new List(widget.entry.image.length);
-      _pageLoadController.addListener(() {
-    if (!_pageLoadController.hasMoreItems) {
-      Scaffold.of(context).showSnackBar(
-        SnackBar(
-          content: Text('No More Items!')
-        )
-      );
-    }
-  });
-      int i = 0;
-      list = new List();
-      while(i < widget.entry.image.length)
-        list.add(i++);
-      id = widget.entry.id;
-      rate = 0;
-      super.initState();
+     
+    int i = 0;
+    list = new List();
+    while(i < widget.entry.image.length)
+      list.add(i++);
+    id = widget.entry.id;
+    rate = 0;
+    super.initState();
     }
 
 
@@ -293,6 +287,19 @@ fontSize: 15
 fontSize: 15
                   ),),
                   Text(ProductCat.getCat(widget.entry.cat), style: TextStyle(
+                    fontSize: 15
+                  ),)
+                ],
+              ),
+              Padding(padding: EdgeInsets.only(top: 10)),
+              
+              Row(
+                children: <Widget>[
+                  Text("Time:  ", style: TextStyle(
+                    fontWeight: FontWeight.bold,
+fontSize: 15
+                  ),),
+                  Text("${timeago.format(DateTime.parse(widget.entry.time))}", style: TextStyle(
                     fontSize: 15
                   ),)
                 ],
@@ -553,7 +560,7 @@ class BackendReviewService {
     final responseBody = (await dio.post("http://${AppConfig.ip}/api/product/review/load", data: {
             "post_user_id": id,
             "limit": limit,
-            "offset": offset
+            "skip": offset
           }
     )).data;
    
@@ -574,6 +581,7 @@ class ReviewModel {
 
   ReviewModel.fromJson(obj) {
 
+    print("-------------------------------------------");
     print(obj);
 
     // this.id = obj["_id"];
