@@ -14,7 +14,9 @@ import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter_slidable/flutter_slidable.dart';
 
 class StoreScreen extends StatefulWidget {
-  StoreScreen({Key key}) : super(key: key);
+  Function callback;
+
+  StoreScreen({Key key, this.callback}) : super(key: key);
 
   @override
   _StoreScreenState createState() => _StoreScreenState();
@@ -175,12 +177,34 @@ buildCat(IconData icon, int i)
                   ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 10, left: 10),
-                    child: Text("Latest Offers", style: TextStyle(
-                    fontFamily: "Oswald",
-                    fontSize: 20,
-                    color: Colors.black
-                  ),),
+                    padding: EdgeInsets.only(top: 15, left: 10, right: 10),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        Text("Latest Offers", style: TextStyle(
+                          fontFamily: "Oswald",
+                          fontSize: 20,
+                          color: Colors.black
+                        ),),
+                        OutlineButton(
+                          borderSide: BorderSide(
+                            color: Color(0xff00b661)
+                          ),
+                          onPressed: (){
+              
+                          },
+                          color: Colors.white,
+                          shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                          child: Container(
+                            alignment: Alignment.center,
+                            child: Text("Filter", style: TextStyle(
+                            color: Color(0xff00b661),
+                          fontSize: 12
+                          ),
+                          )),
+                        ),
+                      ],
+                    )
                   )
                 ],
               )
@@ -288,9 +312,12 @@ buildCat(IconData icon, int i)
         children: <Widget>[
          GestureDetector(
           onTap: (){
-            Navigator.of(context).push(MaterialPageRoute<void>(
-              builder: (BuildContext context)=> PhotoHero(entry: entry,)
-            ));
+            if((entry.image.length != 0))
+            {
+              Navigator.of(context).push(MaterialPageRoute<void>(
+                builder: (BuildContext context)=> PhotoHero(entry: entry,)
+              ));
+            }
           },
            child:  Hero(
              tag: entry.id,

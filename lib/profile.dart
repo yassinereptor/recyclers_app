@@ -2,17 +2,20 @@ import 'dart:convert';
 import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:recyclers/config/config.dart';
 import 'package:recyclers/home.dart';
 import 'package:recyclers/models/user.dart';
 import 'package:recyclers/privacy_policy.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 class ProfileScreen extends StatefulWidget {
   UserData user;
+  Function callback;
 
-  ProfileScreen({Key key, this.user}) : super(key: key);
+  ProfileScreen({Key key, this.user, this.callback}) : super(key: key);
 
   @override
   _ProfileScreenState createState() => _ProfileScreenState(this.user);
@@ -264,8 +267,27 @@ _ProfileScreenState(this.user);
                   ),
                   InkWell(
                     onTap: ()
-                    {
+                    async {
+                      SharedPreferences prefs = await SharedPreferences.getInstance();
+                      var obj = prefs.getString("user_data");
+                      if(obj != null)
+                      {
+                          user.seller = !user.seller;
+                          user.bayer = !user.bayer;
 
+                          Map<String, dynamic> tmp = jsonDecode(obj);
+                          new Dio().post("http://${AppConfig.ip}/api/profile/mode", data: {
+                            "id": tmp['user']["_id"],
+                            "seller": user.seller,
+                            "bayer": user.bayer
+                          }, options: Options(headers: {
+                            "authorization": "Token ${tmp['user']['token']}",
+                          })).then((val){
+                            setState(() {
+                              this.widget.callback();
+                            });
+                          });
+                      }
                     },
                     child: Container(
                     decoration: BoxDecoration(
@@ -287,7 +309,7 @@ _ProfileScreenState(this.user);
                     ),
                     Container(
                       padding: EdgeInsets.only(right: 20),
-                      child: Text("Bayer", style: TextStyle(color: Colors.grey),)
+                      child: Text(user.seller? "Seller" : "Bayer", style: TextStyle(color: Colors.grey),)
                     )
                       ],
                     )

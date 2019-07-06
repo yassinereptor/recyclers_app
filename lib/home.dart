@@ -41,6 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   var data;
   UserData user;
 
+
   Future getDataState() async
   {
       this.user = await getData();   
@@ -279,6 +280,7 @@ class ScrollBehaviorCos extends ScrollBehavior {
 
 class HomeInsiderScreen extends StatefulWidget {
   UserData data;
+
   HomeInsiderScreen({Key key}) : super(key: key);
 
   @override
@@ -288,6 +290,12 @@ class HomeInsiderScreen extends StatefulWidget {
 class _HomeInsiderScreenState extends State<HomeInsiderScreen> {
 
   UserData user;
+
+  void callback() {
+    setState(() {
+      getDataState();
+    });
+  }
 
   @override
   void initState() {
@@ -421,7 +429,7 @@ class _HomeInsiderScreenState extends State<HomeInsiderScreen> {
       case 3:
         if(this.user == null)
           Navigator.pop(context);
-         return ProfileScreen(user: this.user,);
+         return ProfileScreen(user: this.user, callback: this.callback,);
         break;
     }
 
