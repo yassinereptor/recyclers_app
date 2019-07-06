@@ -1,6 +1,7 @@
  import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
@@ -64,7 +65,11 @@ class _HomeScreenState extends State<HomeScreen> {
       if(response.statusCode == 200)
       {
         UserData user;
+        print("****************************************************");
+        print(response.data["user"]["_id"]);
+        print("****************************************************");
         user = new UserData();
+        user.id = response.data["user"]["_id"];
         user.email = response.data["user"]["email"];
         user.name = response.data["user"]["name"];
         user.company_name = response.data["user"]["company_name"];
@@ -79,6 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
         user.profile = response.data["user"]["profile"];
 
         print("------------------------------------------------------------------");
+        print(user.id);
         print(user.email);
         print(user.name);
         print(user.company_name);
@@ -108,11 +114,7 @@ class _HomeScreenState extends State<HomeScreen> {
   
 
   Widget headerView(BuildContext context) { 
-     Uint8List bytes;
-    if(this.user != null)
-    {
-      bytes = base64.decode(this.user.profile);
-    } 
+
     return Column(
       children: <Widget>[
         Container(
@@ -126,7 +128,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       shape: BoxShape.circle,
                       image: new DecorationImage(
                           fit: BoxFit.fill,
-                          image: (this.user == null || this.user.profile == "non")? AssetImage("assets/images/profile.png") : MemoryImage(bytes)
+                          image: (this.user == null || this.user.profile == "non")? AssetImage("assets/images/profile.png") : AssetImage("assets/images/profile.png")//CachedNetworkImageProvider(this.user.)
                         )
                       )
                     ),
@@ -340,6 +342,7 @@ class _HomeInsiderScreenState extends State<HomeInsiderScreen> {
       {
         UserData user;
         user = new UserData();
+        user.id = response.data["user"]["_id"];
         user.email = response.data["user"]["email"];
         user.name = response.data["user"]["name"];
         user.company_name = response.data["user"]["company_name"];

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_pagewise/flutter_pagewise.dart';
@@ -7,6 +9,7 @@ import 'package:recyclers/home.dart';
 import 'package:recyclers/models/product.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:recyclers/product.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:timeago/timeago.dart' as timeago;
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -21,6 +24,56 @@ class _StoreScreenState extends State<StoreScreen> {
 
 static String filter;
 static List<int> fil_cat;
+var cart;
+
+Future getItems()
+async {
+  Dio dio = new Dio();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var obj = prefs.getString("user_data");
+  if(obj != null)
+  {
+    Map<String, dynamic> tmp = jsonDecode(obj);
+    dio.post("http://${AppConfig.ip}/api/cart/load",
+      options: Options(headers: {
+        "authorization": "Token ${tmp['user']['token']}",
+      }), data: {
+      "id": tmp["user"]["_id"]
+    }).then((data){
+     
+      cart = data.data;
+      setState(() {});
+       print("#########################################");
+      print(cart);
+      print("#########################################");
+    });
+  }
+}
+
+Future addItems(id)
+async {
+  Dio dio = new Dio();
+  SharedPreferences prefs = await SharedPreferences.getInstance();
+  var obj = prefs.getString("user_data");
+  if(obj != null)
+  {
+    Map<String, dynamic> tmp = jsonDecode(obj);
+    dio.post("http://${AppConfig.ip}/api/cart/add",
+      options: Options(headers: {
+        "authorization": "Token ${tmp['user']['token']}",
+      }), data: {
+      "id": tmp["user"]["_id"],
+      "prod_id": id
+    }).then((data){
+     
+      print(data.data);
+      getItems();
+      setState(() {
+              
+            });
+    });
+  }
+}
 
 @override
   void initState() {
@@ -35,6 +88,8 @@ static List<int> fil_cat;
   });
   filter = "time";
   fil_cat = new List();
+  cart = new List();
+  getItems();
     super.initState();
   }
 
@@ -62,7 +117,7 @@ buildCat(IconData icon, int i)
                 BoxShadow(color: Colors.black26, offset: Offset.zero, blurRadius: 2, spreadRadius: 0),
               ],
             ),
-            child: IconButton(icon: Icon(icon, size: 22, color: (cats[i] == true)? Colors.white: Color(0xff054a29),), onPressed: (){
+            child: IconButton(icon: Icon(icon, size: 22, color: (cats[i] == true)? Colors.white: Color(0xff054A29),), onPressed: (){
               setState(() {
                 cats[i] = !cats[i];               
               });
@@ -258,12 +313,12 @@ buildCat(IconData icon, int i)
                     color: Colors.black,
                     image: DecorationImage(
                         fit: BoxFit.cover,
-                      image: CachedNetworkImageProvider(
+                      image: (entry.image.length != 0)? CachedNetworkImageProvider(
                         "http://${AppConfig.ip}/products/${entry.user_id}/${entry.image[0]}",
                         errorListener: (){
                           
                         }
-                    )
+                    ) : AssetImage("assets/images/placeholder.png")
                     )
 
                     // image: DecorationImage(
@@ -351,16 +406,27 @@ buildCat(IconData icon, int i)
               child: Container(
                 margin: EdgeInsets.only(right: 5),
                 child: FlatButton(
-                    onPressed: (){},
+                    onPressed: (){
+                      if(entry.fix)
+                      {
+                        addItems(entry.id);
+                      }
+                      else
+                      {
+
+                      }
+                    },
                     color: Color(0xff00b661),
                     shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                    child: Container(
+                    child: (cart.contains(entry.id))? Container(
                       alignment: Alignment.center,
                       child: Text(entry.fix? "Add" : "Bid", style: TextStyle(
                       color: Colors.white,
                     fontSize: 12
                     ),
-                    )),
+                    )): Container(
+                      child: Icon(Icons.check, color: Colors.white,),
+                    ),
                   ),
               ),
             )

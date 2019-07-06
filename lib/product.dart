@@ -1,4 +1,6 @@
 import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
@@ -34,11 +36,15 @@ class _ProductScreenState extends State<ProductScreen> {
   @override
     void initState() {
       // list = new List(widget.entry.image.length);
-     
+
     int i = 0;
-    list = new List();
-    while(i < widget.entry.image.length)
-      list.add(i++);
+      list = new List();
+
+    if(widget.entry.image.length != 0)
+    {
+      while(i < widget.entry.image.length)
+        list.add(i++);
+    }
     id = widget.entry.id;
     rate = 0;
     super.initState();
@@ -47,7 +53,7 @@ class _ProductScreenState extends State<ProductScreen> {
 
 onSendReviewPress()
 async {
-  print("${rate} ${rev_controller.text}");
+  
   if(rev_controller.text.isNotEmpty)
   {
     Dio dio = new Dio();
@@ -57,23 +63,36 @@ async {
       {
           
         Map<String, dynamic> tmp = jsonDecode(obj);
-        dio.post("http://${AppConfig.ip}/api/product/review", data: {
+
+        dio.post("http://${AppConfig.ip}/api/info", data: {
+          "id": tmp["user"]["_id"]
+        }).then((user){
+          if(user.statusCode == 200)
+          {
+            print("------------------------------------------------");
+            print("${rate} ${rev_controller.text}");
+            print("------------------------------------------------");
+
+            dio.post("http://${AppConfig.ip}/api/product/review", data: {
               "post_user_id": widget.entry.user_id,
               "user_id": tmp["user"]["_id"],
               "post_id": widget.entry.id,
               "text": rev_controller.text,
               "rate": rate,
+              "profile": user.data["user"]["profile"],
               "time": new DateTime.now().toString()
-          }).then((data){
-            print(data);
-          });
+            }).then((data){
+              this._pageLoadController.reset();
+               setState(() {
+                rev_controller.text = "";
+                rate = 0.0;
+              });
+            });
+          }
+        });
       }
    
   }
-  setState(() {
-      rev_controller.text = "";
-      rate = 0.0;
-    });
 }
 
 
@@ -89,7 +108,6 @@ final _pageLoadController = PagewiseLoadController(
   pageFuture: (pageIndex) =>
             BackendReviewService.getReview(id, pageIndex * PAGE_SIZE, PAGE_SIZE),
 );
-
 
   @override
   Widget build(BuildContext context){
@@ -158,13 +176,14 @@ final _pageLoadController = PagewiseLoadController(
                 child: Column(
         children: <Widget>[
           Container(
-            color: Color(0xff00b661),
-            padding: EdgeInsets.only(top: 10, bottom: 10),
+            //This
+            color: Color(0xff137547),
+            padding: (list.isNotEmpty)? EdgeInsets.only(top: 10, bottom: 10) : EdgeInsets.only(),
             margin: EdgeInsets.only(bottom: 10),
             child: Stack(
             children: <Widget>[
               Container(
-                child: CarouselSlider(
+                child: (list.isNotEmpty)? CarouselSlider(
         initialPage: 0,
         enableInfiniteScroll: false,
         enlargeCenterPage: true,
@@ -173,7 +192,7 @@ final _pageLoadController = PagewiseLoadController(
               _current = index;
             });
           },
-        items: list.map((i) {
+        items: (list.isNotEmpty)? list.map((i) {
           return Builder(
             builder: (BuildContext context) {
               return Container(
@@ -201,8 +220,8 @@ final _pageLoadController = PagewiseLoadController(
               );
             },
           );
-        }).toList(),
-      ),
+        }).toList() : null,
+      ) : Container(),
               ),
       Positioned(
           bottom: 0.0,
@@ -401,6 +420,7 @@ fontSize: 15
           ];
           } ,
           body: Container(
+            margin: EdgeInsets.only(top: 20),
         child: Container(
           child: ScrollConfiguration(
       behavior: ScrollBehaviorCos(),
@@ -411,7 +431,7 @@ fontSize: 15
                           return Text('Loading...');
                         },
                         noItemsFoundBuilder: (context) {
-                          return Text('No Items Found');
+                          return Text('No Review Found');
                         },
                       ),
     ),
@@ -422,10 +442,63 @@ fontSize: 15
                 );
   }
 
-
-
   Widget _itemBuilder(context, ReviewModel entry, _) {
-    return Text("Hello");
+
+    return Container(
+      padding: EdgeInsets.only(left: 15),
+      margin: EdgeInsets.only(bottom: 10),
+      child: Row(
+        children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(5),
+            child: Container(
+              height: 35,
+              width: 35,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                boxShadow: [
+                  BoxShadow(color: Colors.black26, offset: Offset.zero, blurRadius: 2, spreadRadius: 0),
+                ],
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: (entry.profile == "non")? AssetImage("assets/images/profile.png") : CachedNetworkImageProvider("http://${AppConfig.ip}/profiles/" + entry.user_id + ".png")
+                )
+              ),
+            ),
+          ),
+          Expanded(
+            child: Container(
+              padding: EdgeInsets.only(left: 10, right: 20, top: 5, bottom: 5),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Text(entry.user_name, style: TextStyle(fontWeight: FontWeight.bold),),
+                      Container(
+                        child: Row(
+                          children: <Widget>[
+                              Icon(Icons.star, color: Colors.yellow[800], size: 15,),
+                              Text("${entry.rate}/5", style: TextStyle(color: Colors.yellow[800], fontSize: 13),)
+                            ],
+                          ),
+                      )
+                    ],
+                  ),
+                ),
+                Container(
+                  padding: EdgeInsets.only(top: 5),
+                  child: Text(entry.text),
+                )
+              ],
+            ),
+          ),
+          )
+        ],
+      ),
+    );
   }
 }
 
@@ -554,7 +627,7 @@ class _PhotoHeroProductState extends State<PhotoHeroProduct> {
 
 
 class BackendReviewService {
-  
+
   static Future<List<ReviewModel>> getReview(id, offset, limit) async {
     Dio dio = new Dio();
     final responseBody = (await dio.post("http://${AppConfig.ip}/api/product/review/load", data: {
@@ -570,35 +643,34 @@ class BackendReviewService {
 }
 
 class ReviewModel {
-  String id;
-  String title;
+  String _id;
+  String profile;
+  String post_user_id;
   String user_id;
+  String post_id;
+  String text;
+  double rate;
   String user_name;
-  String desc;
-  String price;
 
 
 
-  ReviewModel.fromJson(obj) {
+  ReviewModel.fromJson(obj)  {
 
-    print("-------------------------------------------");
+    print("------------------------------------");
     print(obj);
+    print("------------------------------------");
 
-    // this.id = obj["_id"];
-    // this.title = obj["title"];
-    // this.desc = obj["desc"];    
-    // this.user_id = obj["user_id"];
-    // this.user_name = obj["user_name"];
-    // this.price = obj["price"].toString();
-    // this.quality = obj["quality"].toString();
-    // this.quantity = obj["quantity"];
-    // this.unit = obj["unit"];
-    // this.image = obj["images"];
-    // this.fix = obj["fix"];
-    // this.bid = obj["bid"];
-    // this.time = obj["time"];
-    // this.cat = obj["cat"];
+    this._id = obj["_id"];
+    this.profile = obj["profile"];
+    this.post_user_id = obj["post_user_id"];
+    this.user_id = obj["user_id"];
+    this.post_id = obj["post_id"];
+    this.text = obj["text"];
+    this.rate = double.parse(obj["rate"].toString());
+    this.user_name = obj["user_name"];
 
+   
+    
   }
 
   static List<ReviewModel> fromJsonList(jsonList) {

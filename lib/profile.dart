@@ -1,7 +1,9 @@
 import 'dart:convert';
 import 'dart:typed_data';
 
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:recyclers/config/config.dart';
 import 'package:recyclers/home.dart';
 import 'package:recyclers/models/user.dart';
 import 'package:recyclers/privacy_policy.dart';
@@ -28,12 +30,9 @@ _ProfileScreenState(this.user);
 
   @override
   Widget build(BuildContext context) {
-     Uint8List bytes;
-    if(this.user != null)
-    {
-     bytes= base64.decode(this.user.profile);
 
-    }
+    print("-----------------------------------");
+    print(this.user.id);
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -43,7 +42,7 @@ _ProfileScreenState(this.user);
                 flex: 2,
                 child: Container(
                 decoration: BoxDecoration(
-                  color: Color(0xff00b661)
+                  color: Color(0xff137547)
                 ),
               ),
               ),
@@ -79,7 +78,7 @@ _ProfileScreenState(this.user);
                         shape: BoxShape.circle,
                         image: new DecorationImage(
                             fit: BoxFit.fill,
-                            image: (this.user == null || this.user.profile == "non")? AssetImage("assets/images/profile.png") : MemoryImage(bytes)
+                            image: (this.user == null || this.user.profile == "non")? AssetImage("assets/images/profile.png") : CachedNetworkImageProvider("http://${AppConfig.ip}/profiles/" + this.user.id + ".png")
                         )
                       ),
                     ),
