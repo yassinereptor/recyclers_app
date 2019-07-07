@@ -419,7 +419,7 @@ class _HomeInsiderScreenState extends State<HomeInsiderScreen> {
       case 1:
         if(this.user == null)
           Navigator.pop(context);
-        return CartScreen();
+        return CartScreen(user: this.user,);
         break;
       case 2:
         if(this.user == null)

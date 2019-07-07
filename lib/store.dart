@@ -31,6 +31,7 @@ var cart;
 Future getItems()
 async {
   Dio dio = new Dio();
+  cart.clear();
   SharedPreferences prefs = await SharedPreferences.getInstance();
   var obj = prefs.getString("user_data");
   if(obj != null)
@@ -42,40 +43,39 @@ async {
       }), data: {
       "id": tmp["user"]["_id"]
     }).then((data){
-     
       cart = data.data;
-      setState(() {});
-       print("#########################################");
+      print("*******************************************");
       print(cart);
-      print("#########################################");
+      print("*******************************************");
+      setState(() {});
     });
   }
 }
 
-Future addItems(id)
-async {
-  Dio dio = new Dio();
-  SharedPreferences prefs = await SharedPreferences.getInstance();
-  var obj = prefs.getString("user_data");
-  if(obj != null)
-  {
-    Map<String, dynamic> tmp = jsonDecode(obj);
-    dio.post("http://${AppConfig.ip}/api/cart/add",
-      options: Options(headers: {
-        "authorization": "Token ${tmp['user']['token']}",
-      }), data: {
-      "id": tmp["user"]["_id"],
-      "prod_id": id
-    }).then((data){
-     
-      print(data.data);
-      getItems();
-      setState(() {
-              
-            });
-    });
-  }
-}
+Future removeItems(id)
+      async {
+        Dio dio = new Dio();
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        var obj = prefs.getString("user_data");
+        if(obj != null)
+        {
+          Map<String, dynamic> tmp = jsonDecode(obj);
+          dio.post("http://${AppConfig.ip}/api/cart/add",
+            options: Options(headers: {
+              "authorization": "Token ${tmp['user']['token']}",
+            }), data: {
+            "id": tmp["user"]["_id"],
+            "prod_id": id,
+          }).then((data){
+          
+            print(data.data);
+            getItems();
+            setState(() {
+                    
+                  });
+          });
+        }
+      }
 
 @override
   void initState() {
@@ -132,6 +132,7 @@ buildCat(IconData icon, int i)
                   j++;
                 });
                 this._pageLoadController.reset();
+                getItems();
                 await Future.value({});
               });
             }, alignment: Alignment.center,),
@@ -177,7 +178,7 @@ buildCat(IconData icon, int i)
                   ),
                   ),
                   Padding(
-                    padding: EdgeInsets.only(top: 15, left: 10, right: 10),
+                    padding: EdgeInsets.only(top: 20, left: 10, right: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
@@ -187,6 +188,7 @@ buildCat(IconData icon, int i)
                           color: Colors.black
                         ),),
                         OutlineButton(
+                          highlightedBorderColor: Color(0xff00b661),
                           borderSide: BorderSide(
                             color: Color(0xff00b661)
                           ),
@@ -216,6 +218,7 @@ buildCat(IconData icon, int i)
           child: RefreshIndicator(
     onRefresh: () async {
       this._pageLoadController.reset();
+      getItems();
       await Future.value({});
     },
     child: ScrollConfiguration(
@@ -239,11 +242,26 @@ buildCat(IconData icon, int i)
 
   }
 
+checkCart(id)
+{
+  bool flag = false;
+
+  if(cart.length > 0)
+  {
+
+    cart.forEach((it){
+
+      if(it["_id"] == id)
+      {
+          flag = true;
+      }
+    });
+  }
+  return (flag);
+}
 
     Widget _itemBuilder(context, ProductModel entry, _) {
-      print("++++++++++++++++++++++++++++++++++++++++++++++++++");
-      print("${entry.id}");
-      print("++++++++++++++++++++++++++++++++++++++++++++++++++");
+     
     return Slidable(
       actionPane: SlidableDrawerActionPane(),
       actionExtentRatio: 0.25,
@@ -436,7 +454,10 @@ buildCat(IconData icon, int i)
                     onPressed: (){
                       if(entry.fix)
                       {
-                        addItems(entry.id);
+                        if(checkCart(entry.id))
+                          removeItems(entry.id);
+                        else
+                          showDialog(context: context,builder: (context) => QuanOverlay(entry: entry, getItems: getItems));
                       }
                       else
                       {
@@ -445,7 +466,7 @@ buildCat(IconData icon, int i)
                     },
                     color: Color(0xff00b661),
                     shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
-                    child: (cart.contains(entry.id))? Container(
+                    child: (!checkCart(entry.id))? Container(
                       alignment: Alignment.center,
                       child: Text(entry.fix? "Add" : "Bid", style: TextStyle(
                       color: Colors.white,
@@ -511,9 +532,9 @@ class ProductModel {
 
   ProductModel.fromJson(obj) {
 
-      print("-------------------------------------------");
-      print(obj);
-      print("-------------------------------------------");
+      // print("-------------------------------------------");
+      // print(obj);
+      // print("-------------------------------------------");
     this.id = obj["_id"];
     this.title = obj["title"];
     this.desc = obj["desc"];    
@@ -582,3 +603,166 @@ class _PhotoHeroState extends State<PhotoHero> {
                 );
   }
 }
+
+
+
+
+class QuanOverlay extends StatefulWidget {
+      var entry;
+      Function getItems;
+
+      QuanOverlay({Key key, this.entry, this.getItems}) : super(key: key);
+      @override
+      State<StatefulWidget> createState() => QuanOverlayState();
+    }
+
+    class QuanOverlayState extends State<QuanOverlay>
+        with SingleTickerProviderStateMixin {
+      AnimationController controller;
+      Animation<double> scaleAnimation;
+      var dropdownValue;
+
+
+
+      Future addItems()
+      async {
+        Dio dio = new Dio();
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        var obj = prefs.getString("user_data");
+        if(obj != null)
+        {
+          Map<String, dynamic> tmp = jsonDecode(obj);
+          dio.post("http://${AppConfig.ip}/api/cart/add",
+            options: Options(headers: {
+              "authorization": "Token ${tmp['user']['token']}",
+            }), data: {
+            "id": tmp["user"]["_id"],
+            "prod_id": widget.entry.id,
+            "quantite": int.parse(dropdownValue.toString())
+          }).then((data){
+          
+            print(data.data);
+            this.widget.getItems();
+            setState(() {
+                    
+                  });
+          });
+        }
+        Navigator.pop(context);
+      }
+
+      @override
+      void initState() {
+        dropdownValue = 1.toString();
+        super.initState();
+        
+        controller =
+            AnimationController(vsync: this, duration: Duration(milliseconds: 450));
+        scaleAnimation =
+            CurvedAnimation(parent: controller, curve: Curves.elasticInOut);
+
+        controller.addListener(() {
+          setState(() {});
+        });
+
+        controller.forward();
+      }
+
+
+
+      @override
+      Widget build(BuildContext context) {
+        return Center(
+          child: Material(
+            color: Colors.transparent,
+            child: ScaleTransition(
+              scale: scaleAnimation,
+              child: Container(
+                margin: EdgeInsets.all(20.0),
+                  padding: EdgeInsets.all(5.0),
+                  height: 210.0,
+                  decoration: ShapeDecoration(
+                      color: Color(0xf100b661),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0))),
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                          child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 30.0, left: 20.0, right: 20.0),
+                        child: Text(
+                          "Choose a quantity",
+                          style: TextStyle(color: Colors.white, fontSize: 16.0),
+                        ),
+                      )),
+                      Expanded(
+                        child: DropdownButton<String>(
+                          iconEnabledColor: Colors.white,
+                          value: dropdownValue,
+                          onChanged: (String newValue) {
+                            setState(() {
+                              dropdownValue = newValue;
+                            });
+                          },
+                          items: new List<String>.generate(100, (i) => (i + 1).toString())
+                            .map<DropdownMenuItem<String>>((value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value, style: TextStyle(
+                                  color: Colors.white
+                                ),),
+                              );
+                            })
+                            .toList(),
+                        ),
+                      ),
+                      Expanded(
+                          child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: FlatButton(
+                                onPressed: (){
+                                  
+                                 addItems();
+                                },
+                                color: Colors.white,
+                                shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  child: Text("Add", style: TextStyle(
+                                  color: Color(0xf100b661),
+                                fontSize: 12
+                                ),
+                                ))
+                              ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 10.0, right: 16.0, top: 16.0, bottom: 16.0),
+                            child:  FlatButton(
+                                onPressed: (){
+                                 Navigator.pop(context);
+                                },
+                                color: Colors.white,
+                                shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  child: Text("Cancel", style: TextStyle(
+                                  color: Color(0xf100b661),
+                                fontSize: 12
+                                ),
+                                ))
+                              ),
+                          ),
+                        ],
+                      ))
+                    ],
+                  )),
+            ),
+          ),
+        );
+      }
+    }

@@ -24,7 +24,7 @@ class MyApp extends StatelessWidget {
       title: 'Recyclers',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primaryColor: new Color(0xff00b661)
+        primaryColor: new Color(0xff137547)
       ),
       home: SplashScreen(),
       routes: {
