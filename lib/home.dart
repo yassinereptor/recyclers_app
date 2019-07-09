@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
       Map<String, dynamic> tmp = jsonDecode(obj);
       Response response;
       Dio dio = new Dio();
-      response = await dio.get("http://${AppConfig.ip}/api/current?id=${tmp['user']['_id']}",
+      response = await dio.get("${AppConfig.ip}/api/current?id=${tmp['user']['_id']}",
       options: Options(headers: {
         "authorization": "Token ${tmp['user']['token']}",
       }));
@@ -342,7 +342,7 @@ class _HomeInsiderScreenState extends State<HomeInsiderScreen> {
       Map<String, dynamic> tmp = jsonDecode(obj);
       Response response;
       Dio dio = new Dio();
-      response = await dio.get("http://${AppConfig.ip}/api/current?id=${tmp['user']['_id']}",
+      response = await dio.get("${AppConfig.ip}/api/current?id=${tmp['user']['_id']}",
       options: Options(headers: {
         "authorization": "Token ${tmp['user']['token']}",
       }));
@@ -393,7 +393,11 @@ class _HomeInsiderScreenState extends State<HomeInsiderScreen> {
 
   onAddPress()
   {
-    if(this.user.seller == true && this.user.bayer == false)
+    if(currentIndex == 1)
+    {
+
+    }
+    else if(this.user.seller == true && this.user.bayer == false)
     {
       Navigator.push(
             context,
@@ -529,7 +533,7 @@ class _HomeInsiderScreenState extends State<HomeInsiderScreen> {
       return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: onAddPress,
-          child: Icon(Icons.add),
+          child: currentIndex == 1? Icon(Icons.monetization_on) : Icon(Icons.add),
           backgroundColor: Color(0xff00b661),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,

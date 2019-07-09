@@ -58,6 +58,7 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
   TextEditingController desc_controller = new TextEditingController();
   TextEditingController price_controller = new TextEditingController();
   TextEditingController qua_controller = new TextEditingController();
+  TextEditingController limit_controller = new TextEditingController();
 
   List<DropdownMenuItem<String>> getDropDownMenuItems() {
     List<DropdownMenuItem<String>> items = new List();
@@ -92,8 +93,8 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
           margin: EdgeInsets.only(right: 10),
           alignment: Alignment.center,
           child: SizedBox(
-            width: 80,
-            height: 80,
+            width: 120,
+            height: 120,
             child: Container(
                   decoration: BoxDecoration(
                     boxShadow: [
@@ -194,7 +195,7 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
       {
           
         Map<String, dynamic> tmp = jsonDecode(obj);
-        response = await dio.post("http://${AppConfig.ip}/api/product/add", data: {
+        response = await dio.post("${AppConfig.ip}/api/product/add", data: {
             "user_id": tmp['user']['_id'],
             "user_name": widget.data.name,
             "title": productData.title,
@@ -279,7 +280,7 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
             ),
             ),
              Container(
-               margin: EdgeInsets.only(bottom: 20),
+               margin: EdgeInsets.only(bottom: 10),
                child: Row(
                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
@@ -301,6 +302,7 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
              ),
             (images.isNotEmpty == true)?
             Container(
+               margin: EdgeInsets.only(bottom: 10),
               alignment: Alignment.center,
               height: 100,
               child: ListView(
@@ -315,16 +317,14 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
             ):
             Container(),
               Container(
-                padding: EdgeInsets.only(bottom: 20),
+                padding: EdgeInsets.only(bottom: 10),
                 child: new TextFormField(
                   controller: title_controller,
                       decoration: new InputDecoration(
                         labelText: "Product Title *",
                         labelStyle: TextStyle(
-              // color: Color(0xff137547)
             ),
                         fillColor: Colors.white,
-                        //fillColor: Colors.green
                       ),
                       validator: (val) {
                         if(val.length==0) {
@@ -355,7 +355,7 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
               ),
               Text("Product Sell mode", style: TextStyle(color: Colors.grey.shade600, fontSize: 16),),
               Container(
-                padding: EdgeInsets.only(bottom: 20),
+                padding: EdgeInsets.only(bottom: 10),
                 child: new Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: <Widget>[
@@ -392,10 +392,40 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
                       ],
                     ),
               ),
-              Text("Product Quality", style: TextStyle(color: Colors.grey.shade600, fontSize: 16),),
+              Container(
+                child: userOption == 1? Container(
+                  child: Container(
+                    padding: EdgeInsets.only(top: 10, bottom: 25),
+                    child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                       Container(
+                         padding: EdgeInsets.only(),
+                         child: Text("Bidding Options", style: TextStyle(color: Colors.grey.shade900, fontSize: 16),),
+                       ),
+                       TextFormField(
+                  controller: limit_controller,
+                      decoration: new InputDecoration(
+                        labelText: "Limited Days",
+                        labelStyle: TextStyle(
+                          ),
+                          fillColor: Colors.white,
+                        ),
+                        validator: (val) {
+                            return null;
+                        },
+                        keyboardType: TextInputType.number,
+                ),
+                    ],
+                  ),
+                  )
+                  
+                ): Container(),
+              ),
+              Text("Product Quality", style: TextStyle(color: Colors.grey.shade900, fontSize: 16),),
               Container(
                 alignment: Alignment.center,
-                padding: EdgeInsets.only(top: 10, bottom: 10),
+                padding: EdgeInsets.only(top: 10, bottom: 5),
                 child: FlutterRatingBar(
                   initialRating: 0,
                   fillColor: Color(0xff00b661),
@@ -416,11 +446,11 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
                 children: <Widget>[
                   Expanded(
                     child: Container(
-                padding: EdgeInsets.only(bottom: 20),
+                padding: EdgeInsets.only(bottom: 10),
                 child: new TextFormField(
                   controller: price_controller,
                       decoration: new InputDecoration(
-                        labelText: "Price *",
+                        labelText: userOption == 1? "Starting price *" : "Price *",
                         labelStyle: TextStyle(
               // color: Color(0xff137547)
                           ),

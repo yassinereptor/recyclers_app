@@ -64,7 +64,7 @@ async {
           
         Map<String, dynamic> tmp = jsonDecode(obj);
 
-        dio.post("http://${AppConfig.ip}/api/info", data: {
+        dio.post("${AppConfig.ip}/api/info", data: {
           "id": tmp["user"]["_id"]
         }).then((user){
           if(user.statusCode == 200)
@@ -73,7 +73,7 @@ async {
             print("${rate} ${rev_controller.text}");
             print("------------------------------------------------");
 
-            dio.post("http://${AppConfig.ip}/api/product/review", data: {
+            dio.post("${AppConfig.ip}/api/product/review", data: {
               "post_user_id": widget.entry.user_id,
               "user_id": tmp["user"]["_id"],
               "post_id": widget.entry.id,
@@ -203,13 +203,13 @@ final _pageLoadController = PagewiseLoadController(
                     alignment: Alignment.center,
                       child: InkWell(
                         onTap: (){
-                            Navigator.push(context, MaterialPageRoute( builder: (context) => PhotoHeroProduct(entry: "http://${AppConfig.ip}/products/${widget.entry.user_id}/${widget.entry.image[i]}", id: widget.entry.id),));
+                            Navigator.push(context, MaterialPageRoute( builder: (context) => PhotoHeroProduct(entry: "${AppConfig.ip}/products/${widget.entry.user_id}/${widget.entry.image[i]}", id: widget.entry.id),));
                         },
                         child: Container(
                         decoration: BoxDecoration(
                       borderRadius: BorderRadius.all(Radius.circular(5)),                          
                           image: DecorationImage(
-                            image: CachedNetworkImageProvider("http://${AppConfig.ip}/products/${widget.entry.user_id}/${widget.entry.image[i]}"),
+                            image: CachedNetworkImageProvider("${AppConfig.ip}/products/${widget.entry.user_id}/${widget.entry.image[i]}"),
                             fit: BoxFit.cover,
                           )
                         ),
@@ -461,7 +461,7 @@ fontSize: 15
                 ],
                 image: DecorationImage(
                   fit: BoxFit.cover,
-                  image: (entry.profile == "non")? AssetImage("assets/images/profile.png") : CachedNetworkImageProvider("http://${AppConfig.ip}/profiles/" + entry.user_id + ".png")
+                  image: (entry.profile == "non")? AssetImage("assets/images/profile.png") : CachedNetworkImageProvider("${AppConfig.ip}/profiles/" + entry.user_id + ".png")
                 )
               ),
             ),
@@ -630,7 +630,7 @@ class BackendReviewService {
 
   static Future<List<ReviewModel>> getReview(id, offset, limit) async {
     Dio dio = new Dio();
-    final responseBody = (await dio.post("http://${AppConfig.ip}/api/product/review/load", data: {
+    final responseBody = (await dio.post("${AppConfig.ip}/api/product/review/load", data: {
             "post_user_id": id,
             "limit": limit,
             "skip": offset

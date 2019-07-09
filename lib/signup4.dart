@@ -71,7 +71,7 @@ class _Signup4ScreenState extends State<Signup4Screen> {
   }
 
   onSignupPress() async {
-      response = await dio.post("http://${AppConfig.ip}/api/signup", data: {
+      response = await dio.post("${AppConfig.ip}/api/signup", data: {
         "email": user.email,
         "password": Crypt.sha256(user.password, salt: '1337fil').toString(),
         "name": user.name,

@@ -64,7 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
     if(_formKey.currentState.validate())
     {
 
-       response = await dio.post("http://${AppConfig.ip}/api/login", data: {
+       response = await dio.post("${AppConfig.ip}/api/login", data: {
         "email": email_controller.text,
         "password": Crypt.sha256(password_controller.text, salt: '1337fil').toString(),
       });

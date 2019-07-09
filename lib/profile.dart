@@ -81,7 +81,7 @@ _ProfileScreenState(this.user);
                         shape: BoxShape.circle,
                         image: new DecorationImage(
                             fit: BoxFit.fill,
-                            image: (this.user == null || this.user.profile == "non")? AssetImage("assets/images/profile.png") : CachedNetworkImageProvider("http://${AppConfig.ip}/profiles/" + this.user.id + ".png")
+                            image: (this.user == null || this.user.profile == "non")? AssetImage("assets/images/profile.png") : CachedNetworkImageProvider("${AppConfig.ip}/profiles/" + this.user.id + ".png")
                         )
                       ),
                     ),
@@ -276,7 +276,7 @@ _ProfileScreenState(this.user);
                           user.bayer = !user.bayer;
 
                           Map<String, dynamic> tmp = jsonDecode(obj);
-                          new Dio().post("http://${AppConfig.ip}/api/profile/mode", data: {
+                          new Dio().post("${AppConfig.ip}/api/profile/mode", data: {
                             "id": tmp['user']["_id"],
                             "seller": user.seller,
                             "bayer": user.bayer

@@ -27,6 +27,8 @@ class CartScreen extends StatefulWidget {
 class _CartScreenState extends State<CartScreen> {
 
   static UserData user;
+  double total;
+
 @override
   void initState() {
     _pageLoadController.addListener(() {
@@ -37,11 +39,13 @@ class _CartScreenState extends State<CartScreen> {
         )
       );
     }
+  });
+    total = 0;
+
     user = this.widget.user;
+    getTotal();
     super.initState();
 
-  
-  });
   }
 
   static const int PAGE_SIZE = 10;
@@ -52,45 +56,142 @@ class _CartScreenState extends State<CartScreen> {
               BackendCartService.getProduct(user.id, pageIndex * PAGE_SIZE, PAGE_SIZE),
   );
 
+Future removeItemsAll()
+      async {
+        Dio dio = new Dio();
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        var obj = prefs.getString("user_data");
+        if(obj != null)
+        {
+          Map<String, dynamic> tmp = jsonDecode(obj);
+          dio.post("${AppConfig.ip}/api/cart/removeall",
+            options: Options(headers: {
+              "authorization": "Token ${tmp['user']['token']}",
+            }), data: {
+            "id": tmp["user"]["_id"],
+          }).then((data){
+          
+            print(data.data);
+            setState(() {
+                    getTotal();
+                    _pageLoadController.reset();
+                  });
+          });
+        }
+      }
+
+  Future removeItem(id)
+      async {
+        Dio dio = new Dio();
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        var obj = prefs.getString("user_data");
+        if(obj != null)
+        {
+          Map<String, dynamic> tmp = jsonDecode(obj);
+          dio.post("${AppConfig.ip}/api/cart/add",
+            options: Options(headers: {
+              "authorization": "Token ${tmp['user']['token']}",
+            }), data: {
+            "id": tmp["user"]["_id"],
+            "prod_id": id,
+          }).then((data){
+          
+            print(data.data);
+            setState(() {
+                    getTotal();
+                    _pageLoadController.reset();
+                  });
+          });
+        }
+      }
+
+  Future getTotal()
+      async {
+        Dio dio = new Dio();
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        var obj = prefs.getString("user_data");
+        if(obj != null)
+        {
+          Map<String, dynamic> tmp = jsonDecode(obj);
+          dio.post("${AppConfig.ip}/api/cart/total",
+            options: Options(headers: {
+              "authorization": "Token ${tmp['user']['token']}",
+            }), data: {
+            "id": tmp["user"]["_id"],
+          }).then((data){
+            print(data.data);
+            setState(() {
+               total = double.parse(data.data.toString());
+              });
+          });
+        }
+      }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        elevation: 25,
+        child: Container(
+          height: 75,
+          padding: EdgeInsets.only(left: 20, right: 20, top: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Row(
+                children: <Widget>[
+                  Container(
+                    alignment: Alignment.topLeft,
+                    child: Text("Price:"),
+                  ),
+                  Container(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Text("${total}", style: TextStyle(
+                          color: Color(0xff00b661),
+                          fontSize: 20
+                        ),),
+                        Text(" Dh", style: TextStyle(
+                          color: Color(0xff00b661)
+                          ),
+                        ),
+                      ],
+                    )
+                  )
+                ],
+              ),
+              // Container(
+              //   child: FlatButton(
+              //       onPressed: (){},
+              //       color: Color(0xff00b661),
+              //       shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(50.0)),
+              //       child: Container(
+              //         height: 25,
+              //         alignment: Alignment.center,
+              //         child: Text("CheckOut", style: TextStyle(
+              //         color: Colors.white,
+              //       ),
+              //       )),
+              //     ),
+              // )
+            ],
+          ),
+        ),
+      ),
       backgroundColor: Colors.white,
       body: NestedScrollView(
         headerSliverBuilder: (context, inn){
           return <Widget>[
             SliverToBoxAdapter(
               child: Container(
-              margin: EdgeInsets.only(bottom: 10, top: 10),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.only(
-                      bottom: 10,
-                      left: 10
-                    ),
-                    child: Text("Categories", style: TextStyle(
-                    fontFamily: "Oswald",
-                    fontSize: 20,
-                    color: Colors.black
-                  ),),
-                  ),
-                  Container(
-                    alignment: Alignment.center,
-                    child: Wrap(
-                    spacing: 15,
-                    children: <Widget>[
-                
-                    ],
-                  ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.only(top: 20, left: 10, right: 10),
+              margin: EdgeInsets.only(bottom: 10),
+              child: Padding(
+                    padding: EdgeInsets.only(top: 10, left: 10, right: 10),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
-                        Text("Latest Offers", style: TextStyle(
+                        Text("Cart", style: TextStyle(
                           fontFamily: "Oswald",
                           fontSize: 20,
                           color: Colors.black
@@ -100,14 +201,12 @@ class _CartScreenState extends State<CartScreen> {
                           borderSide: BorderSide(
                             color: Color(0xff00b661)
                           ),
-                          onPressed: (){
-              
-                          },
+                          onPressed: removeItemsAll,
                           color: Colors.white,
                           shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
                           child: Container(
                             alignment: Alignment.center,
-                            child: Text("Filter", style: TextStyle(
+                            child: Text("Clear all", style: TextStyle(
                             color: Color(0xff00b661),
                           fontSize: 12
                           ),
@@ -116,8 +215,6 @@ class _CartScreenState extends State<CartScreen> {
                       ],
                     )
                   )
-                ],
-              )
             ),
             ),
           ];
@@ -125,6 +222,7 @@ class _CartScreenState extends State<CartScreen> {
         body: Container(
           child: RefreshIndicator(
     onRefresh: () async {
+      getTotal();
       this._pageLoadController.reset();
       await Future.value({});
     },
@@ -250,7 +348,7 @@ class _CartScreenState extends State<CartScreen> {
                     image: DecorationImage(
                         fit: BoxFit.cover,
                       image: (entry.image.length != 0)? CachedNetworkImageProvider(
-                        "http://${AppConfig.ip}/products/${entry.user_id}/${entry.image[0]}",
+                        "${AppConfig.ip}/products/${entry.user_id}/${entry.image[0]}",
                         errorListener: (){
                           
                         }
@@ -316,20 +414,20 @@ class _CartScreenState extends State<CartScreen> {
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
                         Flexible(
-                          child: Text("${entry.price} ", style: TextStyle(
+                          child: Text("${double.parse(entry.price) * entry.order} ", style: TextStyle(
                           color: Color(0xff00b661),
                           fontSize: 16
                         ),),
                         ),
                         Flexible(
-                          child: Text("Dh / ${ProductUnit.getUnit(entry.unit)}", style: TextStyle(
+                          child: Text("Dh", style: TextStyle(
                           color: Color(0xff00b661),
                           fontSize: 12,
                         ),),
                         )
                       ],
                     ),
-                    Text("In Stock: ${entry.quantity}", style: TextStyle(
+                    Text("Quantite: ${entry.order} ${ProductUnit.getUnit(entry.unit)}", style: TextStyle(
                     fontSize: 12,
                     color: Colors.grey
                     ),)
@@ -345,7 +443,7 @@ class _CartScreenState extends State<CartScreen> {
                     onPressed: (){
                       if(entry.fix)
                       {
-                        //addItems(entry.id);
+                        removeItem(entry.id);
                       }
                       else
                       {
@@ -356,9 +454,9 @@ class _CartScreenState extends State<CartScreen> {
                     shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
                     child: Container(
                       alignment: Alignment.center,
-                      child: Text(entry.fix? "Add" : "Bid", style: TextStyle(
+                      child: Text("Remove", style: TextStyle(
                       color: Colors.white,
-                    fontSize: 12
+                    fontSize: 9.5
                     ),
                     )),
                   ),
@@ -391,7 +489,7 @@ class BackendCartService {
     if(obj != null)
     {
       Map<String, dynamic> tmp = jsonDecode(obj);
-      final responseBody = (await dio.post("http://${AppConfig.ip}/api/cart/load",
+      final responseBody = (await dio.post("${AppConfig.ip}/api/cart/load",
       options: Options(headers: {
         "authorization": "Token ${tmp['user']['token']}",
       }), data: {

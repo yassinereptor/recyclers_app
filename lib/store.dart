@@ -37,7 +37,7 @@ async {
   if(obj != null)
   {
     Map<String, dynamic> tmp = jsonDecode(obj);
-    dio.post("http://${AppConfig.ip}/api/cart/load",
+    dio.post("${AppConfig.ip}/api/cart/load",
       options: Options(headers: {
         "authorization": "Token ${tmp['user']['token']}",
       }), data: {
@@ -60,7 +60,7 @@ Future removeItems(id)
         if(obj != null)
         {
           Map<String, dynamic> tmp = jsonDecode(obj);
-          dio.post("http://${AppConfig.ip}/api/cart/add",
+          dio.post("${AppConfig.ip}/api/cart/add",
             options: Options(headers: {
               "authorization": "Token ${tmp['user']['token']}",
             }), data: {
@@ -359,7 +359,7 @@ checkCart(id)
                     image: DecorationImage(
                         fit: BoxFit.cover,
                       image: (entry.image.length != 0)? CachedNetworkImageProvider(
-                        "http://${AppConfig.ip}/products/${entry.user_id}/${entry.image[0]}",
+                        "${AppConfig.ip}/products/${entry.user_id}/${entry.image[0]}",
                         errorListener: (){
                           
                         }
@@ -425,7 +425,7 @@ checkCart(id)
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
                         Flexible(
-                          child: Text("${entry.price} ", style: TextStyle(
+                          child: Text("${double.parse(entry.price)} ", style: TextStyle(
                           color: Color(0xff00b661),
                           fontSize: 16
                         ),),
@@ -500,7 +500,7 @@ class BackendService {
   
   static Future<List<ProductModel>> getProduct(fil_cat, filter, offset, limit) async {
     Dio dio = new Dio();
-    final responseBody = (await dio.post("http://${AppConfig.ip}/api/product/load", data: {
+    final responseBody = (await dio.post("${AppConfig.ip}/api/product/load", data: {
             "cats": fil_cat,
             "filter": filter,
             "skip": offset,
@@ -527,6 +527,7 @@ class ProductModel {
   int quantity;
   int unit;
   int cat;
+  int order;
   var image;
 
 
@@ -536,6 +537,7 @@ class ProductModel {
       // print(obj);
       // print("-------------------------------------------");
     this.id = obj["_id"];
+    this.order = obj["order"];
     this.title = obj["title"];
     this.desc = obj["desc"];    
     this.user_id = obj["user_id"];
@@ -595,7 +597,7 @@ class _PhotoHeroState extends State<PhotoHero> {
                     child: Hero(
                       tag: widget.entry.id,
                       child: PhotoView(
-                        imageProvider: CachedNetworkImageProvider("http://${AppConfig.ip}/products/${widget.entry.user_id}/${widget.entry.image[0]}"),
+                        imageProvider: CachedNetworkImageProvider("${AppConfig.ip}/products/${widget.entry.user_id}/${widget.entry.image[0]}"),
                       ),
                     )
                   ),
@@ -611,6 +613,7 @@ class QuanOverlay extends StatefulWidget {
       var entry;
       Function getItems;
 
+
       QuanOverlay({Key key, this.entry, this.getItems}) : super(key: key);
       @override
       State<StatefulWidget> createState() => QuanOverlayState();
@@ -622,6 +625,7 @@ class QuanOverlay extends StatefulWidget {
       Animation<double> scaleAnimation;
       var dropdownValue;
 
+      TextEditingController qua_controller = TextEditingController();
 
 
       Future addItems()
@@ -632,13 +636,13 @@ class QuanOverlay extends StatefulWidget {
         if(obj != null)
         {
           Map<String, dynamic> tmp = jsonDecode(obj);
-          dio.post("http://${AppConfig.ip}/api/cart/add",
+          dio.post("${AppConfig.ip}/api/cart/add",
             options: Options(headers: {
               "authorization": "Token ${tmp['user']['token']}",
             }), data: {
             "id": tmp["user"]["_id"],
             "prod_id": widget.entry.id,
-            "quantite": int.parse(dropdownValue.toString())
+            "quantite": int.parse(qua_controller.text)
           }).then((data){
           
             print(data.data);
@@ -653,6 +657,7 @@ class QuanOverlay extends StatefulWidget {
 
       @override
       void initState() {
+        qua_controller.text = 1.toString();
         dropdownValue = 1.toString();
         super.initState();
         
@@ -697,24 +702,31 @@ class QuanOverlay extends StatefulWidget {
                         ),
                       )),
                       Expanded(
-                        child: DropdownButton<String>(
-                          iconEnabledColor: Colors.white,
-                          value: dropdownValue,
-                          onChanged: (String newValue) {
-                            setState(() {
-                              dropdownValue = newValue;
-                            });
-                          },
-                          items: new List<String>.generate(100, (i) => (i + 1).toString())
-                            .map<DropdownMenuItem<String>>((value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value, style: TextStyle(
+                        child: Container(
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                          child: new TextFormField(
+                            style: TextStyle(
+                              color: Colors.white
+                            ),
+                            controller: qua_controller,
+                                decoration: new InputDecoration(
+                                  suffixText: "Max ${widget.entry.quantity} ${ProductUnit.getUnit(widget.entry.unit)}",
+                                  suffixStyle: TextStyle(
                                   color: Colors.white
-                                ),),
-                              );
-                            })
-                            .toList(),
+                                ),
+                                  labelText: "Quantity",
+                                  labelStyle: TextStyle(
+                                  color: Colors.white
+                                ),
+                                  fillColor: Colors.white,
+                                  //fillColor: Colors.green
+                                ),
+                                cursorColor: Colors.white,
+                                validator: (val){
+                                  return null;
+                                },
+                                keyboardType: TextInputType.number,
+                        ),
                         ),
                       ),
                       Expanded(
