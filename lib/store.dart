@@ -27,6 +27,7 @@ class _StoreScreenState extends State<StoreScreen> {
 static String filter;
 static List<int> fil_cat;
 var cart;
+var bid;
 
 Future getItems()
 async {
@@ -44,9 +45,19 @@ async {
       "id": tmp["user"]["_id"]
     }).then((data){
       cart = data.data;
-      print("*******************************************");
-      print(cart);
-      print("*******************************************");
+
+
+      dio.post("${AppConfig.ip}/api/bid/load",
+      options: Options(headers: {
+        "authorization": "Token ${tmp['user']['token']}",
+        }), data: {
+        "id": tmp["user"]["_id"]
+      }).then((item){
+        bid = item.data;
+        setState(() {});
+      });
+
+
       setState(() {});
     });
   }
@@ -61,6 +72,30 @@ Future removeItems(id)
         {
           Map<String, dynamic> tmp = jsonDecode(obj);
           dio.post("${AppConfig.ip}/api/cart/add",
+            options: Options(headers: {
+              "authorization": "Token ${tmp['user']['token']}",
+            }), data: {
+            "id": tmp["user"]["_id"],
+            "prod_id": id,
+          }).then((data){
+          
+            print(data.data);
+            getItems();
+            setState(() {
+                    
+                  });
+          });
+        }
+      }
+Future removeBid(id)
+      async {
+        Dio dio = new Dio();
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        var obj = prefs.getString("user_data");
+        if(obj != null)
+        {
+          Map<String, dynamic> tmp = jsonDecode(obj);
+          dio.post("${AppConfig.ip}/api/bid/add",
             options: Options(headers: {
               "authorization": "Token ${tmp['user']['token']}",
             }), data: {
@@ -91,6 +126,7 @@ Future removeItems(id)
   filter = "time";
   fil_cat = new List();
   cart = new List();
+  bid = new List();
   getItems();
     super.initState();
   }
@@ -257,6 +293,19 @@ checkCart(id)
       }
     });
   }
+
+  if(bid.length > 0)
+  {
+
+    bid.forEach((it){
+
+      if(it["_id"] == id)
+      {
+          flag = true;
+      }
+    });
+  }
+
   return (flag);
 }
 
@@ -418,7 +467,7 @@ checkCart(id)
             Expanded(
               flex: 2,
               child: Container(
-                child: Column(
+                child: entry.fix? Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Row(
@@ -443,6 +492,47 @@ checkCart(id)
                     color: Colors.grey
                     ),)
                   ],
+                ) : Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+
+                  children: <Widget>[
+                    Row(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(right: 5),
+                        child: Icon(Icons.timer, size: 15, color: Colors.grey,),      
+                        ),
+                      Text("∞", style: TextStyle(
+                        color: Color(0xff00b661)
+                      ),),
+                      Container(
+                        padding: EdgeInsets.only(left: 2, right: 2),
+                        child: Text("|", style: TextStyle(
+                        color: Colors.grey
+                      ),),
+                      ),
+                      Container(
+                        padding: EdgeInsets.only(right: 5),
+                        child: Icon(Icons.person_outline, size: 16, color: Colors.grey,),      
+                        ),
+                      Text("6 bid", style: TextStyle(
+                        color: Color(0xff00b661)
+                      ),),
+                    ],
+                  ),
+                  Row(
+                    children: <Widget>[
+                      Container(
+                        padding: EdgeInsets.only(right: 5),
+                        child: Icon(Icons.shopping_basket, size: 15, color: Colors.grey,),      
+                        ),
+                  Text("${entry.quantity} ${ProductUnit.getUnit(entry.unit)}", style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.grey
+                    ),)
+                    ],
+                  )
+                  ],
                 )
               ),
             ),
@@ -461,7 +551,12 @@ checkCart(id)
                       }
                       else
                       {
-
+                        if(checkCart(entry.id))
+                        {
+                          removeBid(entry.id);
+                        }
+                        else
+                          showDialog(context: context,builder: (context) => BidOverlay(entry: entry, getItems: getItems));
                       }
                     },
                     color: Color(0xff00b661),
@@ -529,15 +624,14 @@ class ProductModel {
   int cat;
   int order;
   var image;
+  var bid_list;
 
 
   ProductModel.fromJson(obj) {
 
-      // print("-------------------------------------------");
-      // print(obj);
-      // print("-------------------------------------------");
     this.id = obj["_id"];
     this.order = obj["order"];
+    this.bid_list = obj["bid_list"];
     this.title = obj["title"];
     this.desc = obj["desc"];    
     this.user_id = obj["user_id"];
@@ -745,6 +839,178 @@ class QuanOverlay extends StatefulWidget {
                                 child: Container(
                                   alignment: Alignment.center,
                                   child: Text("Add", style: TextStyle(
+                                  color: Color(0xf100b661),
+                                fontSize: 12
+                                ),
+                                ))
+                              ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(
+                                left: 10.0, right: 16.0, top: 16.0, bottom: 16.0),
+                            child:  FlatButton(
+                                onPressed: (){
+                                 Navigator.pop(context);
+                                },
+                                color: Colors.white,
+                                shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  child: Text("Cancel", style: TextStyle(
+                                  color: Color(0xf100b661),
+                                fontSize: 12
+                                ),
+                                ))
+                              ),
+                          ),
+                        ],
+                      ))
+                    ],
+                  )),
+            ),
+          ),
+        );
+      }
+    }
+
+
+
+  class BidOverlay extends StatefulWidget {
+      var entry;
+      Function getItems;
+
+
+      BidOverlay({Key key, this.entry, this.getItems}) : super(key: key);
+      @override
+      State<StatefulWidget> createState() => BidOverlayState();
+    }
+
+    class BidOverlayState extends State<BidOverlay>
+        with SingleTickerProviderStateMixin {
+      AnimationController controller;
+      Animation<double> scaleAnimation;
+      var dropdownValue;
+
+      TextEditingController qua_controller = TextEditingController();
+
+
+      Future addItems()
+      async {
+        Dio dio = new Dio();
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        var obj = prefs.getString("user_data");
+        if(obj != null)
+        {
+          Map<String, dynamic> tmp = jsonDecode(obj);
+          dio.post("${AppConfig.ip}/api/bid/add",
+            options: Options(headers: {
+              "authorization": "Token ${tmp['user']['token']}",
+            }), data: {
+            "id": tmp["user"]["_id"],
+            "prod_id": widget.entry.id,
+            "bid": double.parse(qua_controller.text)
+          }).then((data){
+          
+            print(data.data);
+            this.widget.getItems();
+            setState(() {
+                    
+                  });
+          });
+        }
+        Navigator.pop(context);
+      }
+
+      @override
+      void initState() {
+        qua_controller.text = 1.toString();
+        dropdownValue = 1.toString();
+        super.initState();
+        
+        controller =
+            AnimationController(vsync: this, duration: Duration(milliseconds: 450));
+        scaleAnimation =
+            CurvedAnimation(parent: controller, curve: Curves.elasticInOut);
+
+        controller.addListener(() {
+          setState(() {});
+        });
+
+        controller.forward();
+      }
+
+
+
+      @override
+      Widget build(BuildContext context) {
+        return Center(
+          child: Material(
+            color: Colors.transparent,
+            child: ScaleTransition(
+              scale: scaleAnimation,
+              child: Container(
+                margin: EdgeInsets.all(20.0),
+                  padding: EdgeInsets.all(5.0),
+                  height: 210.0,
+                  decoration: ShapeDecoration(
+                      color: Color(0xf100b661),
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0))),
+                  child: Column(
+                    children: <Widget>[
+                      Expanded(
+                          child: Padding(
+                        padding: const EdgeInsets.only(
+                            top: 30.0, left: 20.0, right: 20.0),
+                        child: Text(
+                          "Add a Bid",
+                          style: TextStyle(color: Colors.white, fontSize: 16.0),
+                        ),
+                      )),
+                      Expanded(
+                        child: Container(
+                          padding: EdgeInsets.only(left: 10, right: 10),
+                          child: new TextFormField(
+                            style: TextStyle(
+                              color: Colors.white
+                            ),
+                            controller: qua_controller,
+                                decoration: new InputDecoration(
+                                //   suffixText: "Max ${widget.entry.quantity} ${ProductUnit.getUnit(widget.entry.unit)}",
+                                //   suffixStyle: TextStyle(
+                                //   color: Colors.white
+                                // ),
+                                  labelText: "Enter a bidding price",
+                                  labelStyle: TextStyle(
+                                  color: Colors.white
+                                ),
+                                  fillColor: Colors.white,
+                                  //fillColor: Colors.green
+                                ),
+                                cursorColor: Colors.white,
+                                validator: (val){
+                                  return null;
+                                },
+                                keyboardType: TextInputType.number,
+                        ),
+                        ),
+                      ),
+                      Expanded(
+                          child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: FlatButton(
+                                onPressed: (){
+                                  
+                                 addItems();
+                                },
+                                color: Colors.white,
+                                shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                                child: Container(
+                                  alignment: Alignment.center,
+                                  child: Text("Bid", style: TextStyle(
                                   color: Color(0xf100b661),
                                 fontSize: 12
                                 ),
