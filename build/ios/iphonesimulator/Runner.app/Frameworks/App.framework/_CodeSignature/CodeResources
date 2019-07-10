@@ -10,7 +10,7 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		Sq2jNnHvbowAR4xCkQ15ppWUOq0=
+		sRHxQt8OxAM4vQOL52YeOPvN1Ys=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>flutter_assets/LICENSE</key>
 		<data>
-		2AAlYhyex7K9osuglCxexo7SMmM=
+		5rikTDbx+N4VOWQ+sA8ZeF/08Fs=
 		</data>
 		<key>flutter_assets/assets/fonts/Iconmoon.ttf</key>
 		<data>
@@ -32,9 +32,29 @@
 		<data>
 		OcsxvpcaPFzrvAR07zwyeks6Ww0=
 		</data>
+		<key>flutter_assets/assets/images/credit-cards_bitcoin.png</key>
+		<data>
+		2ZZQYYCDYbRtF878+mOwApvaLO4=
+		</data>
+		<key>flutter_assets/assets/images/credit-cards_mastercard.png</key>
+		<data>
+		3nZZKGm/baprt35FM6Oj6aIepVo=
+		</data>
+		<key>flutter_assets/assets/images/credit-cards_paypal.png</key>
+		<data>
+		fffjEm866e0SfidOdblZuX+Apms=
+		</data>
+		<key>flutter_assets/assets/images/credit-cards_visa.png</key>
+		<data>
+		B2777xutrYXdaxreAYH7xYShhP8=
+		</data>
 		<key>flutter_assets/assets/images/logo.png</key>
 		<data>
 		8HK/z17hmPHeRF7PNcyr1lQR2L4=
+		</data>
+		<key>flutter_assets/assets/images/mastercard_logo.png</key>
+		<data>
+		EkzzH3YmtssquacIKoWcdT3MSXk=
 		</data>
 		<key>flutter_assets/assets/images/placeholder.png</key>
 		<data>
@@ -43,6 +63,10 @@
 		<key>flutter_assets/assets/images/profile.png</key>
 		<data>
 		ZvvANr3+rbCt2DuZ9Yb/qXjjxBA=
+		</data>
+		<key>flutter_assets/assets/images/visa_logo.png</key>
+		<data>
+		bsfsRKrKfA1ngngho+/241UnnKQ=
 		</data>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.ttf</key>
 		<data>
@@ -54,7 +78,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		mnUDnboVxDxQRqGZEM4X5i6Z+EY=
+		0ctc3fz66rr9SQczv2jgNklfhag=
 		</data>
 		<key>flutter_assets/packages/country_pickers/assets/ad.png</key>
 		<data>
@@ -1095,11 +1119,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			Sq2jNnHvbowAR4xCkQ15ppWUOq0=
+			sRHxQt8OxAM4vQOL52YeOPvN1Ys=
 			</data>
 			<key>hash2</key>
 			<data>
-			sfc8+E/Lx2c5CHE3jH8drytoKpLHy99Pg0W1SDOL0dY=
+			I+3mkbqYohKwFmuvrJx96+Lel+JaO5GahU3KcnaWDBM=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -1117,11 +1141,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			2AAlYhyex7K9osuglCxexo7SMmM=
+			5rikTDbx+N4VOWQ+sA8ZeF/08Fs=
 			</data>
 			<key>hash2</key>
 			<data>
-			VWGh4z/SBynHipRoOnX08pK51WbK/IqouW2jyzjXeaU=
+			wLvxD4DrI+lBz9BUrgthDykW3wbdvnkObHCclGRBqdg=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/fonts/Iconmoon.ttf</key>
@@ -1157,6 +1181,50 @@
 			7TMg+KtavQdLMTgRJGKl7OouFES0/9zSFRryCkO7qB0=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/images/credit-cards_bitcoin.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			2ZZQYYCDYbRtF878+mOwApvaLO4=
+			</data>
+			<key>hash2</key>
+			<data>
+			tZzlIFzQsY74BEFzHBR270Mwkp7VJmQxGB+C+Cujtkw=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/credit-cards_mastercard.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			3nZZKGm/baprt35FM6Oj6aIepVo=
+			</data>
+			<key>hash2</key>
+			<data>
+			a56N1R/Z2HXnESfs3GFaj99ivaShVLb5sKm2aCmMbZk=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/credit-cards_paypal.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			fffjEm866e0SfidOdblZuX+Apms=
+			</data>
+			<key>hash2</key>
+			<data>
+			9AM8eKtvubMRNaL8Gx240p0YipiaeRSyRQ6+KHcX6uM=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/credit-cards_visa.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			B2777xutrYXdaxreAYH7xYShhP8=
+			</data>
+			<key>hash2</key>
+			<data>
+			WZyUwqgeuDxCBnaI+I8rxH2W26O7cNw4BEa3Z9Ni4Uc=
+			</data>
+		</dict>
 		<key>flutter_assets/assets/images/logo.png</key>
 		<dict>
 			<key>hash</key>
@@ -1166,6 +1234,17 @@
 			<key>hash2</key>
 			<data>
 			8Imsd+u1ehuORZLmP+10zajhS2TPe7+jnqjVjB+4Gik=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/mastercard_logo.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			EkzzH3YmtssquacIKoWcdT3MSXk=
+			</data>
+			<key>hash2</key>
+			<data>
+			W2Ylw6iizl8uOkbAgV+UJ5Fu7Rcss/O1YSdWR+ujIEE=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/images/placeholder.png</key>
@@ -1188,6 +1267,17 @@
 			<key>hash2</key>
 			<data>
 			51uvmeURH6j2NVLlTjNAR0DudAdqlBSB3RWQXfYnmEE=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/visa_logo.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			bsfsRKrKfA1ngngho+/241UnnKQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			zANka8vS5AsBgO7KHPLYAuJhKYm1iRNfFk2DxbXsqbU=
 			</data>
 		</dict>
 		<key>flutter_assets/fonts/MaterialIcons-Regular.ttf</key>
@@ -1216,11 +1306,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			mnUDnboVxDxQRqGZEM4X5i6Z+EY=
+			0ctc3fz66rr9SQczv2jgNklfhag=
 			</data>
 			<key>hash2</key>
 			<data>
-			NiAaiiWO4qty/mLavcu3pEz1pBMuVWUhv0P2PiQF3ZQ=
+			2A71nWZDJNdgihz5PDDF+omGMvnunRbcmC5zPZb7hV8=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/country_pickers/assets/ad.png</key>
