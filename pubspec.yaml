@@ -43,6 +43,8 @@ dependencies:
   timeago: ^2.0.17
   photo_view: ^0.1.3
   flutter_slidable: "^0.5.3"
+  # flip_card: ^0.3.0
+  flutter_flip_view: ^1.0.1
     
 dev_dependencies:
   flutter_test:
@@ -66,6 +68,12 @@ flutter:
     - assets/images/profile.png
     - assets/images/bg.jpg
     - assets/images/placeholder.png
+    - assets/images/credit-cards_bitcoin.png
+    - assets/images/credit-cards_mastercard.png
+    - assets/images/credit-cards_paypal.png
+    - assets/images/credit-cards_visa.png
+    - assets/images/visa_logo.png
+    - assets/images/mastercard_logo.png
     
 
   # An image asset can refer to one or more resolution-specific "variants", see

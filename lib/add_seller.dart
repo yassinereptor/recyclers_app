@@ -257,7 +257,7 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-              Text("Add Product", style: TextStyle(
+              Text("Add a Product", style: TextStyle(
                     fontFamily: "Oswald",
                     fontSize: 25,
                     color: Colors.black
@@ -470,7 +470,7 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
                   ),
                   Padding(
                     padding: EdgeInsets.only(left: 10, right: 10),
-                    child: Text(" Per "),
+                    child: Text(userOption == 1? " For " : " Per "),
                   ),
                   new DropdownButton(
                     value: _currentUnit,

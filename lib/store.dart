@@ -57,8 +57,6 @@ async {
         setState(() {});
       });
 
-
-      setState(() {});
     });
   }
 }
@@ -676,6 +674,10 @@ class _PhotoHeroState extends State<PhotoHero> {
 
   @override
   Widget build(BuildContext context){
+    print("----------------------******------------------------");
+    print("${AppConfig.ip}/products/${widget.entry.user_id}/${widget.entry.image[0]}");
+    print("----------------------******------------------------");
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
@@ -741,9 +743,7 @@ class QuanOverlay extends StatefulWidget {
           
             print(data.data);
             this.widget.getItems();
-            setState(() {
-                    
-                  });
+        
           });
         }
         Navigator.pop(context);
@@ -892,33 +892,34 @@ class QuanOverlay extends StatefulWidget {
       var dropdownValue;
 
       TextEditingController qua_controller = TextEditingController();
+      final _formKey = GlobalKey<FormState>();
 
 
       Future addItems()
       async {
-        Dio dio = new Dio();
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        var obj = prefs.getString("user_data");
-        if(obj != null)
+        if(_formKey.currentState.validate())
         {
-          Map<String, dynamic> tmp = jsonDecode(obj);
-          dio.post("${AppConfig.ip}/api/bid/add",
-            options: Options(headers: {
-              "authorization": "Token ${tmp['user']['token']}",
-            }), data: {
-            "id": tmp["user"]["_id"],
-            "prod_id": widget.entry.id,
-            "bid": double.parse(qua_controller.text)
-          }).then((data){
-          
-            print(data.data);
-            this.widget.getItems();
-            setState(() {
-                    
-                  });
-          });
+          Dio dio = new Dio();
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          var obj = prefs.getString("user_data");
+          if(obj != null)
+          {
+            Map<String, dynamic> tmp = jsonDecode(obj);
+            dio.post("${AppConfig.ip}/api/bid/add",
+              options: Options(headers: {
+                "authorization": "Token ${tmp['user']['token']}",
+              }), data: {
+              "id": tmp["user"]["_id"],
+              "prod_id": widget.entry.id,
+              "bid": double.parse(qua_controller.text)
+            }).then((data){
+            
+              print(data.data);
+              this.widget.getItems();
+            });
+          }
+          Navigator.pop(context);
         }
-        Navigator.pop(context);
       }
 
       @override
@@ -944,14 +945,16 @@ class QuanOverlay extends StatefulWidget {
       @override
       Widget build(BuildContext context) {
         return Center(
-          child: Material(
+          child: Form(
+            key: _formKey,
+            child: Material(
             color: Colors.transparent,
             child: ScaleTransition(
               scale: scaleAnimation,
               child: Container(
                 margin: EdgeInsets.all(20.0),
                   padding: EdgeInsets.all(5.0),
-                  height: 210.0,
+                  height: 230.0,
                   decoration: ShapeDecoration(
                       color: Color(0xf100b661),
                       shape: RoundedRectangleBorder(
@@ -989,7 +992,11 @@ class QuanOverlay extends StatefulWidget {
                                 ),
                                 cursorColor: Colors.white,
                                 validator: (val){
-                                  return null;
+                                  print("${double.parse(val)} ${double.parse(widget.entry.price)}");
+                                  if(double.parse(val) <= double.parse(widget.entry.price))
+                                    return "You must set a bid heigher";
+                                  else
+                                    return null;
                                 },
                                 keyboardType: TextInputType.number,
                         ),
@@ -1041,6 +1048,7 @@ class QuanOverlay extends StatefulWidget {
                   )),
             ),
           ),
+          )
         );
       }
     }

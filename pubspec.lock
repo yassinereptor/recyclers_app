@@ -139,6 +139,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  flutter_flip_view:
+    dependency: "direct main"
+    description:
+      name: flutter_flip_view
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.1"
   flutter_html:
     dependency: "direct main"
     description:

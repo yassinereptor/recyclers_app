@@ -11,6 +11,7 @@ import 'package:localstorage/localstorage.dart';
 import 'package:recyclers/add_bayer.dart';
 import 'package:recyclers/add_seller.dart';
 import 'package:recyclers/cart.dart';
+import 'package:recyclers/chart.dart';
 import 'package:recyclers/config/config.dart';
 import 'package:recyclers/models/user.dart';
 import 'package:recyclers/notification.dart';
@@ -393,7 +394,7 @@ class _HomeInsiderScreenState extends State<HomeInsiderScreen> {
 
   onAddPress()
   {
-    if(currentIndex == 1)
+    if(currentIndex == 1 && this.user.bayer)
     {
 
     }
@@ -408,7 +409,7 @@ class _HomeInsiderScreenState extends State<HomeInsiderScreen> {
     {
         Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => AddBayerScreen()),
+            MaterialPageRoute(builder: (context) => AddBayerScreen(data: this.user,)),
           );
     }
   }
@@ -423,7 +424,14 @@ class _HomeInsiderScreenState extends State<HomeInsiderScreen> {
       case 1:
         if(this.user == null)
           Navigator.pop(context);
-        return CartScreen(user: this.user,);
+        if(this.user.bayer)
+        {
+          return CartScreen(user: this.user,);
+        }
+        else
+        {
+          return ChartScreen(user: this.user,);
+        }
         break;
       case 2:
         if(this.user == null)
@@ -533,7 +541,7 @@ class _HomeInsiderScreenState extends State<HomeInsiderScreen> {
       return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: onAddPress,
-          child: currentIndex == 1? Icon(Icons.monetization_on) : Icon(Icons.add),
+          child: currentIndex == 1 && this.user.bayer? Icon(Icons.monetization_on) : Icon(Icons.add),
           backgroundColor: Color(0xff00b661),
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endDocked,

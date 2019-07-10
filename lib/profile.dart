@@ -4,9 +4,11 @@ import 'dart:typed_data';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:photo_view/photo_view.dart';
 import 'package:recyclers/config/config.dart';
 import 'package:recyclers/home.dart';
 import 'package:recyclers/models/user.dart';
+import 'package:recyclers/payment.dart';
 import 'package:recyclers/privacy_policy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -72,7 +74,18 @@ _ProfileScreenState(this.user);
               child: SizedBox(
                 width: 150,
                 height: 150,
-                child: Container(
+                child: InkWell(
+                  onTap: (){
+                    if((this.user != null && this.user.profile != "non"))
+                    {                   
+                      Navigator.of(context).push(MaterialPageRoute<void>(
+                        builder: (BuildContext context)=> PhotoProfileHero(link: "${AppConfig.ip}/profiles/" + this.user.id + ".png")
+                      ));
+                    }
+                  },
+                  child: Hero(
+                    tag: "profile",
+                    child: Container(
                       decoration: BoxDecoration(
                         boxShadow: [
                           BoxShadow(color: Colors.black26, offset: Offset.zero, blurRadius: 5, spreadRadius: 1),
@@ -85,6 +98,8 @@ _ProfileScreenState(this.user);
                         )
                       ),
                     ),
+                  )
+                )
               ),
             ),
             Column(
@@ -216,7 +231,9 @@ _ProfileScreenState(this.user);
                   InkWell(
                     onTap: ()
                     {
-
+                      Navigator.of(context).push(MaterialPageRoute<void>(
+                        builder: (BuildContext context)=> PaymentScreen(user: this.user,)
+                      ));
                     },
                     child: Container(
                     decoration: BoxDecoration(
@@ -512,5 +529,53 @@ _ProfileScreenState(this.user);
         ],
       ),
     );
+  }
+}
+
+
+
+class PhotoProfileHero extends StatefulWidget {
+
+  String link;
+PhotoProfileHero({@required this.link});
+
+  @override
+  _PhotoProfileHeroState createState() => _PhotoProfileHeroState();
+}
+
+class _PhotoProfileHeroState extends State<PhotoProfileHero> {
+
+  @override
+    void initState() {
+      // TODO: implement initState
+      super.initState();
+  //       print("()()()()()(()((()()()(");
+  // print(widget.entry.image);
+    }
+
+  @override
+  Widget build(BuildContext context){
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        iconTheme: IconThemeData(
+          color: Colors.white
+        ),
+      ),
+                  body: Container(
+                    color: Colors.black,
+                    child: Container(
+                    // The blue background emphasizes that it's a new route.
+                    alignment: Alignment.center,
+                    child: Hero(
+                      tag: "profile",
+                      child: PhotoView(
+                        imageProvider: CachedNetworkImageProvider(widget.link),
+                      ),
+                    )
+                  ),
+                  )
+                );
   }
 }

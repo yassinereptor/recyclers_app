@@ -132,9 +132,24 @@ final _pageLoadController = PagewiseLoadController(
                 children: <Widget>[
                   Container(
                     alignment: Alignment.topLeft,
-                    child: Text("Price:"),
+                    child: Text(widget.entry.bid? "Starting price:" : "Price:"),
                   ),
                   Container(
+                    child: widget.entry.bid? Container(
+                    child: Row(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: <Widget>[
+                        Text("${widget.entry.price}", style: TextStyle(
+                          color: Color(0xff00b661),
+                          fontSize: 20
+                        ),),
+                        Text(" Dh for ${widget.entry.quantity} ${ProductUnit.getUnit(widget.entry.unit)}", style: TextStyle(
+                          color: Color(0xff00b661)
+                          ),
+                        ),
+                      ],
+                    )
+                  ) : Container(
                     child: Row(
                       crossAxisAlignment: CrossAxisAlignment.end,
                       children: <Widget>[
@@ -148,6 +163,7 @@ final _pageLoadController = PagewiseLoadController(
                         ),
                       ],
                     )
+                  ),
                   )
                 ],
               ),
@@ -159,7 +175,7 @@ final _pageLoadController = PagewiseLoadController(
                     child: Container(
                       height: 25,
                       alignment: Alignment.center,
-                      child: Text("CheckOut", style: TextStyle(
+                      child: Text("Add", style: TextStyle(
                       color: Colors.white,
                     ),
                     )),
