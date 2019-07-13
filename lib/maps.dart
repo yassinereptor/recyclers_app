@@ -23,7 +23,10 @@ class MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      body: GoogleMap(
+      body: Stack(
+        children: <Widget>[
+          
+          GoogleMap(
         mapType: MapType.hybrid,
         myLocationButtonEnabled: true,
         myLocationEnabled: true,
@@ -57,12 +60,41 @@ class MapScreenState extends State<MapScreen> {
           _controller.complete(controller);
         },
       ),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: onOKPress,
-        label: Text('Ok'),
-        icon: Icon(Icons.check),
-        backgroundColor: Color(0xff00b661),
+      Container(
+            alignment: Alignment.topLeft,
+            margin: EdgeInsets.only(left: 10, top: 40),
+              child: Wrap(
+                children: <Widget>[
+                  FlatButton(
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+                    onPressed: onOKPress,
+                    color: Color(0xff00b661),
+                    shape: new RoundedRectangleBorder(borderRadius: new BorderRadius.circular(30.0)),
+                    child: Container(
+                      alignment: Alignment.center,
+                      width: 50,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        children: <Widget>[
+                          Icon(Icons.check, color: Colors.white,),
+                          Text("Ok", style: TextStyle(
+                            color: Colors.white,
+                          fontSize: 18
+                          )
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              )
+            ),
+        ],
       ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.startTop,
+      // floatingActionButton: FloatingActionButton.extended(
+        
+      // ),
     );
   }
 

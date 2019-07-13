@@ -33,7 +33,6 @@ class _Signup3ScreenState extends State<Signup3Screen> {
   
   }
 
-
   UserData user;
   LatLng result;
   Country ctry;

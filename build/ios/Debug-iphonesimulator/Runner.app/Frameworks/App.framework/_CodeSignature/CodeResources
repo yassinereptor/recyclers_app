@@ -10,7 +10,7 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		sRHxQt8OxAM4vQOL52YeOPvN1Ys=
+		soPgB+t17Xm7dg1/aLfRlykPuWM=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>flutter_assets/LICENSE</key>
 		<data>
-		5rikTDbx+N4VOWQ+sA8ZeF/08Fs=
+		G5yWcc8CAEjjlYhRlh6CRjbq0yc=
 		</data>
 		<key>flutter_assets/assets/fonts/Iconmoon.ttf</key>
 		<data>
@@ -31,6 +31,10 @@
 		<key>flutter_assets/assets/images/bg.jpg</key>
 		<data>
 		OcsxvpcaPFzrvAR07zwyeks6Ww0=
+		</data>
+		<key>flutter_assets/assets/images/bitcoin_logo.png</key>
+		<data>
+		HxJ3RZ8C7T60LKOBmdH3xd6KoLE=
 		</data>
 		<key>flutter_assets/assets/images/credit-cards_bitcoin.png</key>
 		<data>
@@ -56,6 +60,10 @@
 		<data>
 		EkzzH3YmtssquacIKoWcdT3MSXk=
 		</data>
+		<key>flutter_assets/assets/images/paypal_logo.png</key>
+		<data>
+		SFqNU9mL7U4AmGRzddeGWgFOUYk=
+		</data>
 		<key>flutter_assets/assets/images/placeholder.png</key>
 		<data>
 		eax39PxWicT3yh2+wA9+iwWRa30=
@@ -78,7 +86,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		4YLd8fGZe58SCMd22F1FTkrlTPo=
+		4NMUgg4L0Mld6uuIyBy9dLUcYIE=
 		</data>
 		<key>flutter_assets/packages/country_pickers/assets/ad.png</key>
 		<data>
@@ -1119,11 +1127,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			sRHxQt8OxAM4vQOL52YeOPvN1Ys=
+			soPgB+t17Xm7dg1/aLfRlykPuWM=
 			</data>
 			<key>hash2</key>
 			<data>
-			I+3mkbqYohKwFmuvrJx96+Lel+JaO5GahU3KcnaWDBM=
+			vxG1t7BqOmR/IA83EhVSRDUwQSyh987XEKYL8saU5sA=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -1141,11 +1149,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			5rikTDbx+N4VOWQ+sA8ZeF/08Fs=
+			G5yWcc8CAEjjlYhRlh6CRjbq0yc=
 			</data>
 			<key>hash2</key>
 			<data>
-			wLvxD4DrI+lBz9BUrgthDykW3wbdvnkObHCclGRBqdg=
+			2BheugHr4azdqxlpAO3WdiLcdviIO880+Vu2v2kW6fQ=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/fonts/Iconmoon.ttf</key>
@@ -1179,6 +1187,17 @@
 			<key>hash2</key>
 			<data>
 			7TMg+KtavQdLMTgRJGKl7OouFES0/9zSFRryCkO7qB0=
+			</data>
+		</dict>
+		<key>flutter_assets/assets/images/bitcoin_logo.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			HxJ3RZ8C7T60LKOBmdH3xd6KoLE=
+			</data>
+			<key>hash2</key>
+			<data>
+			hYyIk6Rl9RDD16jXTuqjp4G9gZs+/0jrjvDZs0f1eyQ=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/images/credit-cards_bitcoin.png</key>
@@ -1247,6 +1266,17 @@
 			W2Ylw6iizl8uOkbAgV+UJ5Fu7Rcss/O1YSdWR+ujIEE=
 			</data>
 		</dict>
+		<key>flutter_assets/assets/images/paypal_logo.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			SFqNU9mL7U4AmGRzddeGWgFOUYk=
+			</data>
+			<key>hash2</key>
+			<data>
+			/bWTwWSWJH0WZmmigZY9XhMzKRS48v7T3vvqTsvM99w=
+			</data>
+		</dict>
 		<key>flutter_assets/assets/images/placeholder.png</key>
 		<dict>
 			<key>hash</key>
@@ -1306,11 +1336,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4YLd8fGZe58SCMd22F1FTkrlTPo=
+			4NMUgg4L0Mld6uuIyBy9dLUcYIE=
 			</data>
 			<key>hash2</key>
 			<data>
-			GeQcImXwGMMSQLHZK9Rt8Y2LjgICi0gSZ2BqYw+G4EU=
+			5VWihOtBBRtLqSlsNlQKOju8YD8eE66bOUUqrNLWXEE=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/country_pickers/assets/ad.png</key>

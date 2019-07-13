@@ -3,6 +3,7 @@
 //
 
 #import "GeneratedPluginRegistrant.h"
+#import <fluttertoast/FluttertoastPlugin.h>
 #import <geocoder/GeocoderPlugin.h>
 #import <google_maps_flutter/GoogleMapsPlugin.h>
 #import <image_picker/ImagePickerPlugin.h>
@@ -14,6 +15,7 @@
 @implementation GeneratedPluginRegistrant
 
 + (void)registerWithRegistry:(NSObject<FlutterPluginRegistry>*)registry {
+  [FluttertoastPlugin registerWithRegistrar:[registry registrarForPlugin:@"FluttertoastPlugin"]];
   [GeocoderPlugin registerWithRegistrar:[registry registrarForPlugin:@"GeocoderPlugin"]];
   [FLTGoogleMapsPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTGoogleMapsPlugin"]];
   [FLTImagePickerPlugin registerWithRegistrar:[registry registrarForPlugin:@"FLTImagePickerPlugin"]];

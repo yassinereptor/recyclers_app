@@ -1,12 +1,19 @@
+import 'dart:convert';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:recyclers/config/config.dart';
 import 'package:recyclers/home.dart';
 import 'package:flutter_flip_view/flutter_flip_view.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 
 class CreditCardScreen extends StatefulWidget {
-
+      Function reload;
       String service;
-      CreditCardScreen({Key key, this.service}) : super(key: key);
+      String logo;
+      var colors;
+      CreditCardScreen({Key key, this.reload, this.service, this.logo, this.colors}) : super(key: key);
       @override
       State<StatefulWidget> createState() => CreditCardScreenState();
     }
@@ -55,6 +62,50 @@ AnimationController _animationController;
     super.dispose();
   }
 
+
+  onSavePress()async {
+        if(c_number_controller.text.isNotEmpty && c_name_controller.text.isNotEmpty && c_exper_controller.text.isNotEmpty && c_cvc_controller.text.isNotEmpty)
+        {
+          Dio dio = new Dio();
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          var obj = prefs.getString("user_data");
+          if(obj != null)
+          {
+            Map<String, dynamic> tmp = jsonDecode(obj);
+            dio.post("${AppConfig.ip}/api/credit/add",
+              options: Options(headers: {
+                "authorization": "Token ${tmp['user']['token']}",
+              }), data: widget.service == "MasterCard" || widget.service == "Visa" ? {
+              "id": tmp["user"]["_id"],
+              "card_id": tmp["user"]["_id"] + DateTime.now().toString(),
+              "type": widget.service,
+              "card_number": c_number_controller.text,
+              "card_holder": c_name_controller.text,
+              "card_exp": c_exper_controller.text,
+              "card_cvc": c_cvc_controller.text,
+              "card_time": DateTime.now().toString()
+            }: {}).then((data){
+              print(data.data);
+              setState(() {
+                      widget.reload();
+                    });
+            });
+          }
+          Navigator.pop(context);
+        }
+        else{
+          Fluttertoast.showToast(
+            msg: "Fill the card",
+            toastLength: Toast.LENGTH_SHORT,
+            gravity: ToastGravity.BOTTOM,
+            timeInSecForIos: 1,
+            backgroundColor: Colors.red,
+            textColor: Colors.white,
+            fontSize: 16.0
+        );
+        }
+  }
+
   void _flip(bool reverse) {
     if (_animationController.isAnimating) return;
     if (reverse) {
@@ -72,7 +123,7 @@ AnimationController _animationController;
         actions: <Widget>[
           FlatButton(
             textColor: Colors.white,
-            onPressed: (){},
+            onPressed: onSavePress,
             child: Text("Save", style: TextStyle(fontSize: 18),),
             shape: CircleBorder(side: BorderSide(color: Colors.transparent)),
           ),
@@ -116,7 +167,12 @@ AnimationController _animationController;
               ],
             ),
             ),
-            
+            Container(
+              margin: EdgeInsets.only(bottom: 10, left: 20),
+              child: Text("Touch the top of the card to flip it ", style: TextStyle(
+              fontSize: 15,
+            ),),
+            ),
             Container(
               padding: EdgeInsets.all(10),
               child: FlipView(
@@ -177,6 +233,8 @@ AnimationController _animationController;
       TextEditingController c_name_controller = TextEditingController();
       TextEditingController c_exper_controller = TextEditingController();
       TextEditingController c_cvc_controller = TextEditingController();
+      final _formKey1 = GlobalKey<FormState>();
+      final _formKey2 = GlobalKey<FormState>();
 
 
       Widget _buildCard(bool front, GestureTapCallback onTap) {
@@ -189,10 +247,7 @@ AnimationController _animationController;
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(13),
             gradient: LinearGradient(
-              colors: [
-                Color(0xff00b661),
-                Color(0Xff265463),
-              ],
+              colors: widget.colors,
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
             ),
@@ -214,7 +269,7 @@ AnimationController _animationController;
                     height: 40,
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage("assets/images/mastercard_logo.png")
+                        image: AssetImage(widget.logo)
                       )
                     ),
                   ) :
@@ -227,6 +282,8 @@ AnimationController _animationController;
                   ),
                   (front)?
                     Form(
+                    key: _formKey1,
+
                     child: Container(
                       padding: EdgeInsets.only(left: 10, right: 10),
                       child: Column(
@@ -344,6 +401,7 @@ AnimationController _animationController;
 
 
                   Form(
+                    key: _formKey2,
                     child: Container(
                       padding: EdgeInsets.only(left: 10, right: 10),
                       child: Column(
@@ -407,7 +465,7 @@ AnimationController _animationController;
                           height: 40,
                           decoration: BoxDecoration(
                             image: DecorationImage(
-                              image: AssetImage("assets/images/mastercard_logo.png")
+                              image: AssetImage(widget.logo)
                             )
                           ),
                         )

@@ -1,3 +1,5 @@
+import 'package:google_maps_flutter/google_maps_flutter.dart';
+
 class ProductData{
 
   ProductData()
@@ -12,6 +14,7 @@ class ProductData{
   double quality, price;
   bool fix, bid;
   int quantity, unit, cat;
+  LatLng latlng;
 
 }
 

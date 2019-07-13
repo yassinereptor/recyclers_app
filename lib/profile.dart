@@ -6,6 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:photo_view/photo_view.dart';
 import 'package:recyclers/config/config.dart';
+import 'package:recyclers/diposit.dart';
 import 'package:recyclers/home.dart';
 import 'package:recyclers/models/user.dart';
 import 'package:recyclers/payment.dart';
@@ -248,6 +249,34 @@ _ProfileScreenState(this.user);
                           child: Icon(Icons.payment, color: Color(0xff00b661),),
                         ),
                         Text("Payment Method", style: TextStyle(color: Color(0xff054A29)),),
+                      ],
+                    )
+                  ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    child: Divider(color: Color(0xff00b661),),
+                  ),
+                  InkWell(
+                    onTap: ()
+                    {
+                      Navigator.of(context).push(MaterialPageRoute<void>(
+                        builder: (BuildContext context)=> DipositScreen(user: this.user,)
+                      ));
+                    },
+                    child: Container(
+                    decoration: BoxDecoration(
+                      
+                    ),
+                    padding: EdgeInsets.only(top: 12, bottom: 12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(right: 20, left: 20),
+                          child: Icon(Icons.monetization_on, color: Color(0xff00b661),),
+                        ),
+                        Text("Diposit", style: TextStyle(color: Color(0xff054A29)),),
                       ],
                     )
                   ),

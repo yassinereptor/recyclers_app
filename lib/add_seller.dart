@@ -3,10 +3,14 @@ import 'dart:io';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
+import 'package:geocoder/geocoder.dart';
+import 'package:geocoder/model.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:recyclers/config/config.dart';
 import 'package:recyclers/home.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:recyclers/maps.dart';
 import 'package:recyclers/models/product.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -53,12 +57,13 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
   List<DropdownMenuItem<String>> _dropDownMenuCats;
   String _currentUnit;
   String _currentCat;
-
+  LatLng result;
   TextEditingController title_controller = new TextEditingController();
   TextEditingController desc_controller = new TextEditingController();
   TextEditingController price_controller = new TextEditingController();
   TextEditingController qua_controller = new TextEditingController();
   TextEditingController limit_controller = new TextEditingController();
+  TextEditingController pos_controller = TextEditingController();
 
   List<DropdownMenuItem<String>> getDropDownMenuItems() {
     List<DropdownMenuItem<String>> items = new List();
@@ -80,6 +85,24 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
       ));
     }
     return items;
+  }
+
+  onMapPress()
+  {
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => MapScreen()),
+    ).then((val){
+      result = val;
+       final coordinates = new Coordinates(result.latitude, result.longitude);
+        Geocoder.local.findAddressesFromCoordinates(coordinates).then((addresses){
+            setState(() {
+              print("-------------------|${addresses.first.addressLine}|------------------------");
+                pos_controller.text = addresses.first.addressLine;     
+            });
+        });
+      
+    });
   }
 
   productsImage()
@@ -183,6 +206,7 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
       productData.quantity = int.parse(qua_controller.text);
       productData.fix = userOption == 0? true : false;
       productData.bid = userOption == 1? true : false;
+      productData.latlng = (result != null)? result : new LatLng(0, 0);
 
       productData.images = images;
       
@@ -427,6 +451,7 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
                 alignment: Alignment.center,
                 padding: EdgeInsets.only(top: 10, bottom: 5),
                 child: FlutterRatingBar(
+                  itemSize: 30,
                   initialRating: 0,
                   fillColor: Color(0xff00b661),
                   borderColor: Color(0xff00b661).withAlpha(60),
@@ -435,6 +460,41 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
                     productData.quality = rating;
                   },
                 ),
+              ),
+              Container(
+                padding: EdgeInsets.only(bottom: 20, top: 5),
+
+                child: Row(
+                  children: <Widget>[
+                    Container(
+                      margin: EdgeInsets.only(right: 5),
+                   child: IconButton(icon: Icon(Icons.map), iconSize: 30, color: Color(0xff00b661), onPressed: onMapPress, alignment: Alignment.center),
+                    ),
+                    Expanded(
+                      child: Container(
+                      child: new TextFormField(
+                        controller: pos_controller,
+                      decoration: new InputDecoration(
+                        labelText: "Enter your position",
+                        labelStyle: TextStyle(
+              // color: Color(0xff137547)
+            ),
+                        fillColor: Colors.white,
+                        //fillColor: Colors.green
+                      ),
+                      validator: (val) {
+                        if(val.length==0) {
+                          return "Position cannot be empty";
+                        }else{
+                          return null;
+                        }
+                      },
+                      keyboardType: TextInputType.text,
+              ),
+                    ),
+                    )
+                  ],
+                )
               ),
               DropdownButton(
                 value: _currentCat,
