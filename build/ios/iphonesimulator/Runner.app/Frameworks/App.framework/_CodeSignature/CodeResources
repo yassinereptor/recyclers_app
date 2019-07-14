@@ -10,7 +10,7 @@
 		</data>
 		<key>flutter_assets/AssetManifest.json</key>
 		<data>
-		soPgB+t17Xm7dg1/aLfRlykPuWM=
+		ldkM7WAdHaLWvb2V80ds/0FaqvM=
 		</data>
 		<key>flutter_assets/FontManifest.json</key>
 		<data>
@@ -18,7 +18,7 @@
 		</data>
 		<key>flutter_assets/LICENSE</key>
 		<data>
-		G5yWcc8CAEjjlYhRlh6CRjbq0yc=
+		dhIEtpuRQvB2b9X41ISwNvYmfrw=
 		</data>
 		<key>flutter_assets/assets/fonts/Iconmoon.ttf</key>
 		<data>
@@ -86,7 +86,7 @@
 		</data>
 		<key>flutter_assets/kernel_blob.bin</key>
 		<data>
-		4NMUgg4L0Mld6uuIyBy9dLUcYIE=
+		uvylAbotpfFrhNFDXIQ2ZRfAlyY=
 		</data>
 		<key>flutter_assets/packages/country_pickers/assets/ad.png</key>
 		<data>
@@ -1116,6 +1116,50 @@
 		<data>
 		AlgKy1FbEPcZcd0kdJLLHtOy68I=
 		</data>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/american_express.png</key>
+		<data>
+		EgdycDjF+C4sC5xMU1VOGoJR4Nc=
+		</data>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/dinners_club.png</key>
+		<data>
+		fXA6+QC1LXwAgxR4QZq2gGDkz6Q=
+		</data>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/discover.png</key>
+		<data>
+		97aZvrtjp5IDWghTwshF9Y9nv2g=
+		</data>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/dob.png</key>
+		<data>
+		tJube8aM4l7rDToIE3jP7ykWf+s=
+		</data>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/jcb.png</key>
+		<data>
+		b/Ofdm7nFSW/HVLjHzoaqFiG6Ok=
+		</data>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/mastercard.png</key>
+		<data>
+		Lj1s1icqWPppmgl9ee3IQjIj6PQ=
+		</data>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/otp.png</key>
+		<data>
+		YQfU2O6Mg/jMScGpeLa2AnFwXOk=
+		</data>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/paystack_logo.png</key>
+		<data>
+		cgsLsOXxS7Fy7I+u6zr0AOFg7Kk=
+		</data>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/successful.png</key>
+		<data>
+		LLKOGgkHAx6xcu6wdudQHxVf8/I=
+		</data>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/verve.png</key>
+		<data>
+		UnscqOtuVT32QoXalH4bKmjHTro=
+		</data>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/visa.png</key>
+		<data>
+		83a8vPRqL17Lnh81BiYwsAdLq7s=
+		</data>
 		<key>flutter_assets/vm_snapshot_data</key>
 		<data>
 		Dna2BxcG22HN2x7XHM+DJIIqXcM=
@@ -1127,11 +1171,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			soPgB+t17Xm7dg1/aLfRlykPuWM=
+			ldkM7WAdHaLWvb2V80ds/0FaqvM=
 			</data>
 			<key>hash2</key>
 			<data>
-			vxG1t7BqOmR/IA83EhVSRDUwQSyh987XEKYL8saU5sA=
+			5TgtXAwAa9kziu5UYy6PXzRK41E2ZeKaVnpyfrtrgN0=
 			</data>
 		</dict>
 		<key>flutter_assets/FontManifest.json</key>
@@ -1149,11 +1193,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			G5yWcc8CAEjjlYhRlh6CRjbq0yc=
+			dhIEtpuRQvB2b9X41ISwNvYmfrw=
 			</data>
 			<key>hash2</key>
 			<data>
-			2BheugHr4azdqxlpAO3WdiLcdviIO880+Vu2v2kW6fQ=
+			4PhOiPvgXRxOG6ScaIPq5wQR6spLqBs8g0J9muIae2E=
 			</data>
 		</dict>
 		<key>flutter_assets/assets/fonts/Iconmoon.ttf</key>
@@ -1336,11 +1380,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			4NMUgg4L0Mld6uuIyBy9dLUcYIE=
+			uvylAbotpfFrhNFDXIQ2ZRfAlyY=
 			</data>
 			<key>hash2</key>
 			<data>
-			5VWihOtBBRtLqSlsNlQKOju8YD8eE66bOUUqrNLWXEE=
+			yGT24XW0SNPL7pJJ3m+jy8uUb+1hz/VUsx+cJHtmglY=
 			</data>
 		</dict>
 		<key>flutter_assets/packages/country_pickers/assets/ad.png</key>
@@ -4168,6 +4212,127 @@
 			<key>hash2</key>
 			<data>
 			ETQZmaktT/cBMTCTNJd49hWX7HSYPa18vp5zuIwK13c=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/american_express.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			EgdycDjF+C4sC5xMU1VOGoJR4Nc=
+			</data>
+			<key>hash2</key>
+			<data>
+			f+ocDeS2SG1iKEJjkVTgYDYK9+gXw9uPvZa0zmsmPr4=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/dinners_club.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			fXA6+QC1LXwAgxR4QZq2gGDkz6Q=
+			</data>
+			<key>hash2</key>
+			<data>
+			W7nG7pCpEibr2LdoCWs5UYeNSbPv29oZmc7nXhg/LY4=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/discover.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			97aZvrtjp5IDWghTwshF9Y9nv2g=
+			</data>
+			<key>hash2</key>
+			<data>
+			Q7gVzMvOozbCCWiEbULHXg+GMV31aTIGmEgOVHlgnC4=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/dob.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			tJube8aM4l7rDToIE3jP7ykWf+s=
+			</data>
+			<key>hash2</key>
+			<data>
+			S8ySUWUaXrNA49R5IJqvGyQ6pHzkT4B5NQCm6MiGtGo=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/jcb.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			b/Ofdm7nFSW/HVLjHzoaqFiG6Ok=
+			</data>
+			<key>hash2</key>
+			<data>
+			Rxpu2VOocDcSv3Ti1GITCv6Np5KHjkqYKe3PbRMWme8=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/mastercard.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			Lj1s1icqWPppmgl9ee3IQjIj6PQ=
+			</data>
+			<key>hash2</key>
+			<data>
+			svbbM9DYl1WhW/jEXCml4KVRdPCS4ztzWPo/V3bL60E=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/otp.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			YQfU2O6Mg/jMScGpeLa2AnFwXOk=
+			</data>
+			<key>hash2</key>
+			<data>
+			7fzjd9z2d/mJ40p5wByV4D5SbyrMXdlPhghTQIKF8Y8=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/paystack_logo.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			cgsLsOXxS7Fy7I+u6zr0AOFg7Kk=
+			</data>
+			<key>hash2</key>
+			<data>
+			fqsX4q1W+a9Das+0SIEdUGPr8au5wlt7dCFpQs50Iug=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/successful.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			LLKOGgkHAx6xcu6wdudQHxVf8/I=
+			</data>
+			<key>hash2</key>
+			<data>
+			CANFPDCBnk7htaZu7rLAkTtwQjcuv0d4xGcevQ8DECk=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/verve.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			UnscqOtuVT32QoXalH4bKmjHTro=
+			</data>
+			<key>hash2</key>
+			<data>
+			HEdydFkJev6Qc2OgBYi/UvlEDxIKju0HhqSukUdY5dU=
+			</data>
+		</dict>
+		<key>flutter_assets/packages/flutter_paystack/assets/images/visa.png</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			83a8vPRqL17Lnh81BiYwsAdLq7s=
+			</data>
+			<key>hash2</key>
+			<data>
+			oLCsL5YF/bwmQBidnvjoKVmzkUh8p/JHWO2dqt7aZoU=
 			</data>
 		</dict>
 		<key>flutter_assets/vm_snapshot_data</key>

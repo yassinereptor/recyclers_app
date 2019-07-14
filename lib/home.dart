@@ -129,10 +129,10 @@ class _HomeScreenState extends State<HomeScreen> {
                   decoration: new BoxDecoration(
                       shape: BoxShape.circle,
                       image: new DecorationImage(
-                          fit: BoxFit.fill,
-                          image: (this.user == null || this.user.profile == "non")? AssetImage("assets/images/profile.png") : AssetImage("assets/images/profile.png")//CachedNetworkImageProvider(this.user.)
+                            fit: BoxFit.fill,
+                            image: (this.user == null || this.user.profile == "non")? AssetImage("assets/images/profile.png") : CachedNetworkImageProvider("${AppConfig.ip}/profiles/" + this.user.id + ".png")
                         )
-                      )
+                      ),
                     ),
               Container(
                   margin: EdgeInsets.only(left: 16),

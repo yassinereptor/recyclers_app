@@ -23,15 +23,30 @@ class DipositScreen extends StatefulWidget {
 
 class _DipositScreenState extends State<DipositScreen> {
   static var user;
+  List<String> list = ["Helo", "cklds"];
 
 @override
   void initState() {
     user = widget.user;
+
+    _dropDownMenuItems = getDropDownMenuItems();
+    dropdownValue = _dropDownMenuItems[0].value;
     super.initState();
 
   
   }
 
+ List<DropdownMenuItem<String>> _dropDownMenuItems;
+  List<DropdownMenuItem<String>> getDropDownMenuItems() {
+    List<DropdownMenuItem<String>> items = new List();
+    for (String item in list) {
+      items.add(new DropdownMenuItem(
+          value: item,
+          child: new Text(item)
+      ));
+    }
+    return items;
+  }
 
   // getItems()
   // async{
@@ -54,6 +69,8 @@ class _DipositScreenState extends State<DipositScreen> {
   //     });
   //   }
   // }
+
+  String dropdownValue;
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +152,28 @@ class _DipositScreenState extends State<DipositScreen> {
            ];
          },
          body: Container(
-          
+           padding: EdgeInsets.only(left: 20, right: 20),
+          child: Column(
+            children: <Widget>[
+              Container(
+            child:Row(
+              children: <Widget>[
+                Expanded(
+                  child:  DropdownButton<String>(
+            value: dropdownValue,
+            onChanged: (String newValue) {
+              setState(() {
+                dropdownValue = newValue;
+              });
+            },
+            items: _dropDownMenuItems
+          ),
+                )
+              ],
+            )
+          )
+            ],
+          )
         )
         ),
        )

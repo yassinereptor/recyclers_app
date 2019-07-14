@@ -1,5 +1,7 @@
 PODS:
   - Flutter (1.0.0)
+  - flutter_paystack (0.0.1):
+    - Flutter
   - fluttertoast (0.0.2):
     - Flutter
   - FMDB (2.7.5):
@@ -29,6 +31,7 @@ PODS:
 
 DEPENDENCIES:
   - Flutter (from `.symlinks/flutter/ios`)
+  - flutter_paystack (from `.symlinks/plugins/flutter_paystack/ios`)
   - fluttertoast (from `.symlinks/plugins/fluttertoast/ios`)
   - geocoder (from `.symlinks/plugins/geocoder/ios`)
   - google_maps_flutter (from `.symlinks/plugins/google_maps_flutter/ios`)
@@ -46,6 +49,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   Flutter:
     :path: ".symlinks/flutter/ios"
+  flutter_paystack:
+    :path: ".symlinks/plugins/flutter_paystack/ios"
   fluttertoast:
     :path: ".symlinks/plugins/fluttertoast/ios"
   geocoder:
@@ -65,6 +70,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   Flutter: 58dd7d1b27887414a370fcccb9e645c08ffd7a6a
+  flutter_paystack: 50021637b71e7712780744f69d2843e71b65175d
   fluttertoast: b644586ef3b16f67fae9a1f8754cef6b2d6b634b
   FMDB: 2ce00b547f966261cd18927a3ddb07cb6f3db82a
   geocoder: 3cfab70531a0b367e917bafe82df4c30f6d4c45a

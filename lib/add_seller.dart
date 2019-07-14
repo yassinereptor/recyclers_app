@@ -232,6 +232,9 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
             "images": productData.images,
             "unit": productData.unit,
             "cat": productData.cat,
+            "lat": productData.latlng.latitude.toString(),
+            "lng": productData.latlng.longitude.toString(),
+            "pos": pos_controller.text,
             "time": new DateTime.now().toString(),
           },
           options: Options(headers: {
@@ -475,7 +478,7 @@ class _AddSellerScreenState extends State<AddSellerScreen> {
                       child: new TextFormField(
                         controller: pos_controller,
                       decoration: new InputDecoration(
-                        labelText: "Enter your position",
+                        labelText: "Enter Product position",
                         labelStyle: TextStyle(
               // color: Color(0xff137547)
             ),

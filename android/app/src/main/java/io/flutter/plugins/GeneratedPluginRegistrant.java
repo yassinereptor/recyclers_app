@@ -1,6 +1,7 @@
 package io.flutter.plugins;
 
 import io.flutter.plugin.common.PluginRegistry;
+import co.paystack.flutterpaystack.FlutterPaystackPlugin;
 import io.github.ponnamkarthik.toast.fluttertoast.FluttertoastPlugin;
 import com.aloisdeniel.geocoder.GeocoderPlugin;
 import io.flutter.plugins.googlemaps.GoogleMapsPlugin;
@@ -18,6 +19,7 @@ public final class GeneratedPluginRegistrant {
     if (alreadyRegisteredWith(registry)) {
       return;
     }
+    FlutterPaystackPlugin.registerWith(registry.registrarFor("co.paystack.flutterpaystack.FlutterPaystackPlugin"));
     FluttertoastPlugin.registerWith(registry.registrarFor("io.github.ponnamkarthik.toast.fluttertoast.FluttertoastPlugin"));
     GeocoderPlugin.registerWith(registry.registrarFor("com.aloisdeniel.geocoder.GeocoderPlugin"));
     GoogleMapsPlugin.registerWith(registry.registrarFor("io.flutter.plugins.googlemaps.GoogleMapsPlugin"));

@@ -45,6 +45,8 @@ dependencies:
   flutter_slidable: "^0.5.3"
   flutter_flip_view: ^1.0.1
   fluttertoast: ^3.1.0
+  flutter_paystack: ^1.0.1
+  bitcoin_flutter: ^1.0.7
     
 dev_dependencies:
   flutter_test:

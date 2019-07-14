@@ -9,6 +9,7 @@ import 'package:recyclers/config/config.dart';
 import 'package:recyclers/diposit.dart';
 import 'package:recyclers/home.dart';
 import 'package:recyclers/models/user.dart';
+import 'package:recyclers/offers.dart';
 import 'package:recyclers/payment.dart';
 import 'package:recyclers/privacy_policy.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -200,6 +201,34 @@ _ProfileScreenState(this.user);
                   ),
                   ),
                    Padding(
+                    padding: EdgeInsets.only(left: 20, right: 20),
+                    child: Divider(color: Color(0xff00b661),),
+                  ),
+                  InkWell(
+                    onTap: ()
+                    {
+                      Navigator.of(context).push(MaterialPageRoute<void>(
+                        builder: (BuildContext context)=> OffersScreen()
+                      ));
+                    },
+                    child: Container(
+                    decoration: BoxDecoration(
+                      
+                    ),
+                    padding: EdgeInsets.only(top: 12, bottom: 12),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: EdgeInsets.only(right: 20, left: 20),
+                          child: Icon(Icons.store, color: Color(0xff00b661),),
+                        ),
+                        Text("My Offers", style: TextStyle(color: Color(0xff054A29)),),
+                      ],
+                    )
+                  ),
+                  ),
+                  Padding(
                     padding: EdgeInsets.only(left: 20, right: 20),
                     child: Divider(color: Color(0xff00b661),),
                   ),
