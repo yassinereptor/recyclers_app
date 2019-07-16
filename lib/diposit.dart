@@ -23,28 +23,58 @@ class DipositScreen extends StatefulWidget {
 
 class _DipositScreenState extends State<DipositScreen> {
   static var user;
-  List<String> list = ["Helo", "cklds"];
+  List<String> list;
 
 @override
   void initState() {
     user = widget.user;
 
     _dropDownMenuItems = getDropDownMenuItems();
-    dropdownValue = _dropDownMenuItems[0].value;
+    dropdownValue = (_dropDownMenuItems.length > 0)? _dropDownMenuItems[0].value : "Loading...";
+    getCat();
     super.initState();
 
-  
+
+  }
+
+
+  getCat() async {
+    Dio dio = new Dio();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var obj = prefs.getString("user_data");
+    Map<String, dynamic> tmp = jsonDecode(obj);
+    Response responseBody = (await dio.post("${AppConfig.ip}/api/credit/load",
+        options: Options(headers: {
+          "authorization": "Token ${tmp['user']['token']}",
+        }), 
+    data: {
+            "id": tmp["user"]["_id"],
+          }
+    )).data;
+    List<String> items = List();
+    // responseBody.data.forEach((d){
+    //   items.add("${d.credit.type}");
+    // });
+    print("------------------------------");
+    print(responseBody.data);
+    print("------------------------------");
+    setState(() {
+          list = items;
+        });
   }
 
  List<DropdownMenuItem<String>> _dropDownMenuItems;
   List<DropdownMenuItem<String>> getDropDownMenuItems() {
     List<DropdownMenuItem<String>> items = new List();
-    for (String item in list) {
+   if(items.length > 0)
+   {
+      for (String item in list) {
       items.add(new DropdownMenuItem(
           value: item,
           child: new Text(item)
       ));
     }
+   }
     return items;
   }
 
@@ -74,6 +104,8 @@ class _DipositScreenState extends State<DipositScreen> {
 
   @override
   Widget build(BuildContext context) {
+
+  
     return Scaffold(
       appBar: AppBar(
         // actions: <Widget>[
@@ -159,7 +191,7 @@ class _DipositScreenState extends State<DipositScreen> {
             child:Row(
               children: <Widget>[
                 Expanded(
-                  child:  DropdownButton<String>(
+                  child:  (list.length > 0)? DropdownButton(
             value: dropdownValue,
             onChanged: (String newValue) {
               setState(() {
@@ -167,7 +199,7 @@ class _DipositScreenState extends State<DipositScreen> {
               });
             },
             items: _dropDownMenuItems
-          ),
+          ): Container(),
                 )
               ],
             )
