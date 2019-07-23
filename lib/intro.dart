@@ -24,7 +24,7 @@ class _IntroScreenState extends State<IntroScreen> {
       new Slide(
         title: "Title",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis non sollicitudin nisi.",
-        pathImage: 0xe96d,
+        icon: IconData(0xe96d, fontFamily: "iconmoon"),
         backgroundColor: Color(0xff5bba6f),
       ),
     );
@@ -33,7 +33,7 @@ class _IntroScreenState extends State<IntroScreen> {
       new Slide(
         title: "PENCIL",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis non sollicitudin nisi.",
-        pathImage: 0xe96e,
+        icon: IconData(0xe96e, fontFamily: "iconmoon"),
         backgroundColor: Color(0xff137547),
       ),
     );
@@ -42,7 +42,7 @@ class _IntroScreenState extends State<IntroScreen> {
       new Slide(
         title: "RULER",
         description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis non sollicitudin nisi.",
-        pathImage: 0xe98d,
+        icon: IconData(0xe98d, fontFamily: "iconmoon"),
         backgroundColor: Color(0xff054a29),
       ),
     );

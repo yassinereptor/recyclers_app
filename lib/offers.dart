@@ -484,17 +484,25 @@ buildCat(IconData icon, int i)
 class BackendService {
   
   static Future<List<ProductModel>> getProduct(fil_cat, filter, offset, limit) async {
+
     Dio dio = new Dio();
-    final responseBody = (await dio.post("${AppConfig.ip}/api/product/load", data: {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+        var obj = prefs.getString("user_data");
+        if(obj != null)
+        {
+          Map<String, dynamic> tmp = jsonDecode(obj);
+          final responseBody = (await dio.post("${AppConfig.ip}/api/product/load/user", data: {
+            "id": tmp["user"]["_id"],
             "cats": fil_cat,
             "filter": filter,
             "skip": offset,
             "limit": limit
           }
-    )).data;
-   
-    print(responseBody);
-    return ProductModel.fromJsonList(responseBody);
+          )).data;
+        
+          print(responseBody);
+          return ProductModel.fromJsonList(responseBody);
+        }
   }
 }
 
